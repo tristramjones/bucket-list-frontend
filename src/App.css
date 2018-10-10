@@ -26,16 +26,20 @@
   padding: 30px 30px;
 }
 
-.map {
-  height: 100vh;
-  min-height: 100vh;
-  grid-column: 2 / 3;
-}
-
 .menu-heading {
   margin-bottom: 20px;
 }
 
 .locations-list {
   list-style: none;
+}
+
+.leaflet-container {
+  height: 700px;
+  width: 100%;
+}
+
+#mapid {
+  height: 100%;
+  width: 100%;
 }
