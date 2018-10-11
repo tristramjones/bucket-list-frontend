@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { connect } from 'react-redux';
 import L from 'leaflet'
 
 const stamenTerrainTiles = 'http://stamen-tiles-{s}.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.png';
@@ -7,12 +8,12 @@ const stamenTerrainAttr = 'Map tiles by <a href="http://stamen.com">Stamen Desig
 const mapCenter = [39.9528, -75.1638];
 const zoomLevel = 2;
 
-export default class GeoMap extends Component {
+class GeoMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentZoomLevel: zoomLevel,
-     };
+    };
   }
 
   componentDidMount() {
@@ -52,6 +53,18 @@ export default class GeoMap extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    cities: state.cities
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  console.log(dispatch)
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(GeoMap);
 
 // <Popup>
 // <ArtworkPopup />
