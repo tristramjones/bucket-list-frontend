@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 
 .header {
   background-color: #292C34;
@@ -24,7 +27,7 @@
 }
 
 .search-input {
-  width: 250px;
+  width: 200px;
   height: 40px;
   margin: 20px 20px 0 0;
   border: 1px solid #ccc;
@@ -35,7 +38,7 @@
 }
 
 .search-button {
-  width: 150px;
+  width: 200px;
   height: 40px;
   margin: 20px 0 20px 0;
   border: none;

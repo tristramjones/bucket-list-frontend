@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import '../App.css';
 
+const BASE_URL = 'http://localhost:3000/api/v1';
+
 class Search extends Component {
   state = { input: '' };
 
@@ -13,11 +15,26 @@ class Search extends Component {
     const query = this.state.input.split(' ').join('%20').toLowerCase();
     fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&city=' + query)
     .then(r=>r.json())
-    .then(data=>this.props.addCity(data[0]));
+    .then(locations=>this.props.addLocation(locations[0]))
+    .then(action=>this.persistLocationsToBackend(this.props.locations[this.props.locations.length-1]))
+  }
+
+  persistLocationsToBackend = (location_obj) => {
+    fetch(`${BASE_URL}/locations`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        name: location_obj.display_name.split(', ')[0],
+        location: location_obj
+      })
+    })
   }
 
   render() {
-    console.log(this.props.cities)
+    console.log(this.props.locations)
     return (
       <div className="search-container">
         <h2>Where To Next?</h2>
@@ -36,16 +53,16 @@ class Search extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    cities: state.cities
+    locations: state.locations
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCity: (data) => {
+    addLocation: (location) => {
       dispatch({
-        type: 'ADD_CITY',
-        payload: data
+        type: 'ADD_LOCATION',
+        payload: location
       })
     }
   };

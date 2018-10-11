@@ -1,15 +1,15 @@
 
 const defaultState = {
-  cities: [],
+  locations: [],
   selectedMarker: {},
 }
 
 const reducer = (state=defaultState, action) => {
   switch(action.type) {
-    case 'ADD_CITY':
+    case 'ADD_LOCATION':
       return {
         ...state,
-        cities: [...state.cities, action.payload]
+        locations: [...state.locations, action.payload]
       }
     default:
       return state
