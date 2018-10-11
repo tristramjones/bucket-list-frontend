@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Menu } from './components/Menu'
+import Search from './components/Search'
 import GeoMap from './components/GeoMap'
 import './App.css';
 
 const BASE_URL = 'http://localhost:3000/api/v1';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      isMenuDisplayed: true,
-      markers: []
+      isMenuDisplayed: false,
     };
   }
 
@@ -24,8 +24,8 @@ class App extends Component {
   render() {
     return (
       <div className="app-container">
-        { this.state.isMenuDisplayed ? <Menu locations={ this.state.markers }/> : null }
-        <GeoMap />
+        <Search />
+        { this.state.isMenuDisplayed ? <Menu locations={ this.props.markers }/> : null }
       </div>
     );
   }
@@ -39,3 +39,7 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(App)
+
+
+
+// <GeoMap />
