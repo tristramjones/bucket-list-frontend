@@ -22,10 +22,12 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props.locations)
     return (
       <div className="app-container">
         <Search />
         { this.state.isMenuDisplayed ? <Menu locations={ this.props.markers }/> : null }
+        { this.props.locations.length > 0 ? <GeoMap /> : null }
       </div>
     );
   }
@@ -34,7 +36,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    markers: state.markers
+    locations: state.locations
   }
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import GeoMap from './GeoMap'
 import '../App.css';
 
 const BASE_URL = 'http://localhost:3000/api/v1';
@@ -12,6 +13,7 @@ class Search extends Component {
   }
 
   handleSearch = (event) => {
+    event.preventDefault();
     const query = this.state.input.split(' ').join('%20').toLowerCase();
     fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&city=' + query)
     .then(r=>r.json())
@@ -28,23 +30,30 @@ class Search extends Component {
       method: 'POST',
       body: JSON.stringify({
         name: location_obj.display_name.split(', ')[0],
-        location: location_obj
+        location_json: JSON.stringify(location_obj)
       })
     })
   }
 
   render() {
-    console.log(this.props.locations)
     return (
       <div className="search-container">
         <h2>Where To Next?</h2>
-        <input
-          className="search-input"
-          value={this.state.input}
-          placeholder="Enter a city name"
-          onChange={this.handleInput}>
-        </input>
-        <button className="search-button" onClick={this.handleSearch}>Search</button>
+        <div>
+          <form>
+            <input
+              className="search-input"
+              value={this.state.input}
+              placeholder="Enter a city name"
+              onChange={this.handleInput}>
+            </input>
+            <input
+              className="search-button"
+              onClick={this.handleSearch}
+              type="Submit">
+            </input>
+          </form>
+        </div>
       </div>
     )
   };
@@ -69,3 +78,12 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Search)
+
+
+// <input
+//   className="search-input"
+//   value={this.state.input}
+//   placeholder="Enter a city name"
+//   onChange={this.handleInput}>
+// </input>
+// <button className="search-button" onClick={this.handleSearch}>Search</button>

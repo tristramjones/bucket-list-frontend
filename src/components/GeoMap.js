@@ -3,16 +3,15 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
 import L from 'leaflet'
 
-const stamenTerrainTiles = 'http://stamen-tiles-{s}.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.png';
+const stamenTerrainTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const stamenTerrainAttr = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-const mapCenter = [39.9528, -75.1638];
-const zoomLevel = 2;
+const zoomLevel = 12;
 
 class GeoMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentZoomLevel: zoomLevel,
+      currentZoomLevel: zoomLevel
     };
   }
 
@@ -40,8 +39,11 @@ class GeoMap extends Component {
     return (
       <Map
         className="map"
-        ref={m => { this.leafletMap = m; }}
-        center={mapCenter}
+        ref={m => { this.leafletMap = m; } }
+        center={
+          [this.props.locations[this.props.locations.length-1].lat,
+          this.props.locations[this.props.locations.length-1].lon]
+        }
         zoom={zoomLevel}
         onClick={this.handleMarkerCreation}
       >
@@ -56,12 +58,12 @@ class GeoMap extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    cities: state.cities
+    locations: state.locations
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  console.log(dispatch)
+  return {}
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(GeoMap);
