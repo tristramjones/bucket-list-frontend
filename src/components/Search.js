@@ -39,8 +39,6 @@ class Search extends Component {
     let currentLocation;
     fetch(`${BASE_URL}/locations`)
     .then(res=>res.json())
-    // .then(locations=>currentLocation = locations.find(l=>JSON.parse(l.location_json).place_id === location_obj.place_id))
-    // .then(location=>console.log(location))
     .then(locations=> {
       currentLocation = locations.find(l=>JSON.parse(l.location_json).place_id === location_obj.place_id)
     })
@@ -104,12 +102,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Search)
-
-
-// <input
-//   className="search-input"
-//   value={this.state.input}
-//   placeholder="Enter a city name"
-//   onChange={this.handleInput}>
-// </input>
-// <button className="search-button" onClick={this.handleSearch}>Search</button>

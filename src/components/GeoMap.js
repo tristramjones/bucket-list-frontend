@@ -48,7 +48,7 @@ class GeoMap extends Component {
         title: '',
         description: '',
         trip_id: 1,
-        // position: position
+        position: JSON.stringify(position._latlng)
       })
     })
   }
