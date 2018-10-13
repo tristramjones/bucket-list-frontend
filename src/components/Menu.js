@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 export const Menu = (props) => {
   return (

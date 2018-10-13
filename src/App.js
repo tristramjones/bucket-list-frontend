@@ -5,8 +5,6 @@ import Search from './components/Search'
 import GeoMap from './components/GeoMap'
 import './App.css';
 
-const BASE_URL = 'http://localhost:3000/api/v1';
-
 class App extends Component {
   constructor() {
     super();
@@ -26,6 +24,7 @@ class App extends Component {
       <div className="app-container">
         <Search />
         { this.state.isMenuDisplayed ? <Menu locations={ this.props.markers }/> : null }
+        { this.props.locations.length > 0 ? <GeoMap /> : null }
       </div>
     );
   }
@@ -34,7 +33,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    markers: state.markers
+    locations: state.locations
   }
 }
 
