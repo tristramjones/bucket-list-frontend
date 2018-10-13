@@ -57,6 +57,7 @@ class Search extends Component {
         location_id: id
       })
     })
+    .then(console.log)
   }
 
   render() {
@@ -97,7 +98,8 @@ const mapDispatchToProps = (dispatch) => {
         type: 'ADD_LOCATION',
         payload: location
       })
-    }
+    },
+    setCurrentTrip: ()
   };
 }
 
