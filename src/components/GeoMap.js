@@ -3,13 +3,14 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
 import L from 'leaflet'
 
+const BASE_URL = 'http://localhost:3000/api/v1';
 const stamenTerrainTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const stamenTerrainAttr = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 const zoomLevel = 12;
 
 class GeoMap extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       currentZoomLevel: zoomLevel
     };
@@ -32,7 +33,24 @@ class GeoMap extends Component {
     const lat = event.latlng.lat
     const lng = event.latlng.lng
     const position = L.marker([lat,lng]).addTo(leafletMap)
+    this.persistAttractionToBackend(position)
     return <Marker position={ position }></Marker>
+  }
+
+  persistAttractionToBackend = (position) => {
+    fetch(`${BASE_URL}/attractions`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        title: '',
+        description: '',
+        trip_id: 1,
+        // position: position
+      })
+    })
   }
 
   render() {
