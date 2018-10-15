@@ -57,10 +57,10 @@ class Search extends Component {
         location_id: currentLocation.id
       })
     })
-    .then(r=>this.fetchCurrentTrip(currentLocation))
+    .then(r=>this.dispatchCurrentTrip(currentLocation))
   }
 
-  fetchCurrentTrip = (currentLocation) => {
+  dispatchCurrentTrip = (currentLocation) => {
     let currentTrip;
     fetch(`${BASE_URL}/trips`)
     .then(res=>res.json())

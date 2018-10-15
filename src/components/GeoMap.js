@@ -17,34 +17,36 @@ class GeoMap extends Component {
     };
   }
 
-  componentDidMount() {
+  handleZoomLevelChange = (newZoomLevel) => {
+    this.setState({ currentZoomLevel: newZoomLevel });
+  }
+
+  // componentWillMount = () => {
+  //   fetch(`${BASE_URL}/attractions`)
+  //   .then(res=>res.json())
+  //   .then(attractions=>this.props.dispatchAllAttractions(attractions))
+  //   .then(res=>this.props.trips.map((t) => {
+  //     const position = [JSON.parse(t.position).lat,JSON.parse(t.position).lng]
+  //     const position = L.marker([JSON.parse(t.position).lat,JSON.parse(t.position).lng]).addTo(leafletMap)
+  //     return <Marker position={ position }></Marker>
+  //   }))
+  // }
+
+  componentDidMount = () => {
     const leafletMap = this.leafletMap.leafletElement;
     leafletMap.on('zoomend', () => {
       const updatedZoomLevel = leafletMap.getZoom();
       this.handleZoomLevelChange(updatedZoomLevel);
     });
-
-    fetch(`${BASE_URL}/attractions`)
-    .then(res=>res.json())
-    .then(trips=>this.props.setAllTrips(trips))
-    .then(res=>this.props.trips.map((t) => {
-      // const position = [JSON.parse(t.position).lat,JSON.parse(t.position).lng]
-      const position = L.marker([JSON.parse(t.position).lat,JSON.parse(t.position).lng]).addTo(leafletMap)
-      return <Marker position={ position }></Marker>
-    }))
-  }
-
-  handleZoomLevelChange = (newZoomLevel) => {
-    this.setState({ currentZoomLevel: newZoomLevel });
   }
 
   handleMarkerCreation = (event) => {
     const lat = event.latlng.lat
     const lng = event.latlng.lng
-    // const position = [lat,lng]
-    const leafletMap = this.leafletMap.leafletElement;
-    const position = L.marker([lat,lng]).addTo(leafletMap)
+    const position = [lat,lng]
     this.persistAttractionToBackend(position)
+    // const leafletMap = this.leafletMap.leafletElement;
+    // const position = L.marker([lat,lng]).addTo(leafletMap)
   }
 
   persistAttractionToBackend = (position) => {
@@ -58,12 +60,13 @@ class GeoMap extends Component {
         title: '',
         description: '',
         trip_id: this.props.currentTrip.id,
-        position: JSON.stringify(position._latlng)
+        position: JSON.stringify(position)
       })
     })
   }
 
   render() {
+    console.log(this.props.attractions)
     return (
       <Map
         className="map"
@@ -79,6 +82,16 @@ class GeoMap extends Component {
           attribution={stamenTerrainAttr}
           url={stamenTerrainTiles}
         />
+        { this.props.attractions.map(a => {
+            return (
+              <Marker
+                key={a.id}
+                position={[JSON.parse(a.position).lat,JSON.parse(a.position).lng]}
+                >
+              </Marker>
+            )
+          })
+        }
       </Map>
     );
   }
@@ -88,16 +101,17 @@ const mapStateToProps = (state) => {
   return {
     locations: state.locations,
     currentTrip: state.currentTrip,
-    trips: state.trips
+    trips: state.trips,
+    attractions: state.attractions
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setAllTrips: (trips) => {
+    dispatchAllAttractions: (attractions) => {
       dispatch({
-        type: 'SET_ALL_TRIPS',
-        payload: trips
+        type: 'SET_ALL_ATTRACTIONS',
+        payload: attractions
       })
     }
   }
