@@ -30,7 +30,7 @@
   height: 40px;
   margin: 20px 20px 0 0;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 1px;
   text-align: center;
   font-size: 14px;
   font-family: 'Raleway', sans-serif;
@@ -41,7 +41,7 @@
   height: 40px;
   margin: 20px 0 20px 0;
   border: none;
-  border-radius: 5px;
+  border-radius: 1px;
   background-color: #42c5f4;
   color: #292C34;
   font-size: 14px;
@@ -52,7 +52,7 @@
   background-color: white;
   color: #42c5f4;
   border: 1px solid #42c5f4;
-  border-radius: 5px;
+  border-radius: 1px;
 }
 
 .leaflet-container {
@@ -60,7 +60,7 @@
   height: 400px;
   width: 67%;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 1px;
 }
 
 #mapid {

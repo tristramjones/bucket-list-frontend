@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
+// import CustomPopup from './CustomPopup'
 import L from 'leaflet'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
@@ -16,16 +17,37 @@ class GeoMap extends Component {
     };
   }
 
+  handleZoomLevelChange = (newZoomLevel) => {
+    this.setState({ currentZoomLevel: newZoomLevel });
+  }
+
+  // componentWillMount = () => {
+  //   const leafletMap = this.leafletMap.leafletElement;
+  //
+  //   fetch(`${BASE_URL}/attractions`)
+  //   .then(res=>res.json())
+  //   .then(attractions=>this.props.dispatchAllAttractions(attractions))
+  //   .then(res=>this.props.trips.map((t) => {
+  //     // const position = [JSON.parse(t.position).lat,JSON.parse(t.position).lng]
+  //     const position = L.marker([JSON.parse(t.position).lat,JSON.parse(t.position).lng]).addTo(leafletMap)
+  //     return <Marker position={ position }></Marker>
+  //   }))
+  // }
+
   componentDidMount() {
     const leafletMap = this.leafletMap.leafletElement;
     leafletMap.on('zoomend', () => {
       const updatedZoomLevel = leafletMap.getZoom();
       this.handleZoomLevelChange(updatedZoomLevel);
     });
-  }
 
-  handleZoomLevelChange = (newZoomLevel) => {
-    this.setState({ currentZoomLevel: newZoomLevel });
+    fetch(`${BASE_URL}/attractions`)
+    .then(res=>res.json())
+    .then(attractions=>this.props.dispatchAllAttractions(attractions))
+    .then(res=>this.props.trips.map((t) => {
+      const position = L.marker([JSON.parse(t.position).lat,JSON.parse(t.position).lng]).addTo(leafletMap)
+      return <Marker position={ position }></Marker>
+    }))
   }
 
   handleMarkerCreation = (event) => {
@@ -47,7 +69,7 @@ class GeoMap extends Component {
       body: JSON.stringify({
         title: '',
         description: '',
-        trip_id: 1,
+        trip_id: this.props.currentTrip.id,
         position: JSON.stringify(position._latlng)
       })
     })
@@ -76,12 +98,22 @@ class GeoMap extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    locations: state.locations
+    locations: state.locations,
+    currentTrip: state.currentTrip,
+    trips: state.trips,
+    attractions: state.attractions
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    dispatchAllAttractions: (attractions) => {
+      dispatch({
+        type: 'SET_ALL_ATTRACTIONS',
+        payload: attractions
+      })
+    }
+  }
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(GeoMap);
@@ -89,3 +121,14 @@ export default connect(mapStateToProps,mapDispatchToProps)(GeoMap);
 // <Popup>
 // <ArtworkPopup />
 // </Popup>
+//
+// { this.props.attractions.map(a => {
+//     return (
+//       <Marker
+//         key={a.id}
+//         position={[JSON.parse(a.position).lat,JSON.parse(a.position).lng]}
+//         >
+//       </Marker>
+//     )
+//   })
+// }
