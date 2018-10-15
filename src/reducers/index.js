@@ -2,6 +2,8 @@
 const defaultState = {
   locations: [],
   currentTrip: null,
+  trips: [],
+  attractions: [[21.2332,-81.232]]
 }
 
 const reducer = (state=defaultState, action) => {
@@ -15,6 +17,16 @@ const reducer = (state=defaultState, action) => {
       return {
         ...state,
         currentTrip: action.payload
+      }
+    case 'SET_ALL_TRIPS':
+      return {
+        ...state,
+        trips: action.payload
+      }
+    case 'SET_ALL_ATTRACTIONS':
+      return {
+        ...state,
+        attractions: action.payload
       }
     default:
       return state

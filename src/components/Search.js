@@ -42,10 +42,10 @@ class Search extends Component {
     .then(locations=> {
       currentLocation = locations.find(l=>JSON.parse(l.location_json).place_id === location_obj.place_id)
     })
-    .then(r=>this.persistTripToBackend(currentLocation.id))
+    .then(r=>this.persistTripToBackend(currentLocation))
   }
 
-  persistTripToBackend = (id) => {
+  persistTripToBackend = (currentLocation) => {
     fetch(`${BASE_URL}/trips`, {
       headers: {
         'Accept': 'application/json',
@@ -54,10 +54,20 @@ class Search extends Component {
       method: 'POST',
       body: JSON.stringify({
         user_id: 1,
-        location_id: id
+        location_id: currentLocation.id
       })
     })
-    .then(console.log)
+    .then(r=>this.fetchCurrentTrip(currentLocation))
+  }
+
+  fetchCurrentTrip = (currentLocation) => {
+    let currentTrip;
+    fetch(`${BASE_URL}/trips`)
+    .then(res=>res.json())
+    .then(trips=> {
+      currentTrip = trips.find(t=>t.location_id === currentLocation.id)
+    })
+    .then(r=>(this.props.setCurrentTrip(currentTrip)))
   }
 
   render() {
@@ -99,7 +109,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: location
       })
     },
-    setCurrentTrip: ()
+    setCurrentTrip: (currentTrip) => {
+      dispatch({
+        type: 'SET_CURRENT_TRIP',
+        payload: currentTrip
+      })
+    }
   };
 }
 

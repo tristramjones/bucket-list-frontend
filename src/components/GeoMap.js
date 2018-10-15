@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
+// import CustomPopup from './CustomPopup'
 import L from 'leaflet'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
@@ -22,6 +23,15 @@ class GeoMap extends Component {
       const updatedZoomLevel = leafletMap.getZoom();
       this.handleZoomLevelChange(updatedZoomLevel);
     });
+
+    fetch(`${BASE_URL}/attractions`)
+    .then(res=>res.json())
+    .then(trips=>this.props.setAllTrips(trips))
+    .then(res=>this.props.trips.map((t) => {
+      // const position = [JSON.parse(t.position).lat,JSON.parse(t.position).lng]
+      const position = L.marker([JSON.parse(t.position).lat,JSON.parse(t.position).lng]).addTo(leafletMap)
+      return <Marker position={ position }></Marker>
+    }))
   }
 
   handleZoomLevelChange = (newZoomLevel) => {
@@ -29,12 +39,12 @@ class GeoMap extends Component {
   }
 
   handleMarkerCreation = (event) => {
-    const leafletMap = this.leafletMap.leafletElement;
     const lat = event.latlng.lat
     const lng = event.latlng.lng
+    // const position = [lat,lng]
+    const leafletMap = this.leafletMap.leafletElement;
     const position = L.marker([lat,lng]).addTo(leafletMap)
     this.persistAttractionToBackend(position)
-    return <Marker position={ position }></Marker>
   }
 
   persistAttractionToBackend = (position) => {
@@ -47,7 +57,7 @@ class GeoMap extends Component {
       body: JSON.stringify({
         title: '',
         description: '',
-        trip_id: 1,
+        trip_id: this.props.currentTrip.id,
         position: JSON.stringify(position._latlng)
       })
     })
@@ -76,12 +86,21 @@ class GeoMap extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    locations: state.locations
+    locations: state.locations,
+    currentTrip: state.currentTrip,
+    trips: state.trips
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    setAllTrips: (trips) => {
+      dispatch({
+        type: 'SET_ALL_TRIPS',
+        payload: trips
+      })
+    }
+  }
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(GeoMap);
