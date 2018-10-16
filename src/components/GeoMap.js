@@ -39,7 +39,10 @@ class GeoMap extends Component {
     const lat = event.latlng.lat
     const lng = event.latlng.lng
     const marker = L.marker([lat,lng]).addTo(leafletMap)
-    return marker
+    this.setState({
+      popupIsDisplayed: true,
+      currentAttraction: marker
+    })
   }
 
   persistAttractionToBackend = (event) => {
