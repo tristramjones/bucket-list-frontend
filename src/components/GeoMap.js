@@ -32,10 +32,11 @@ class GeoMap extends Component {
   }
 
   handleMarkerCreation = (event) => {
-    this.setState({
-      popupIsDisplayed: true,
-      currentAttraction: event
-    })
+    if(this.state.popupIsDisplayed) {
+      this.setState({ popupIsDisplayed: false })
+    } else {
+      this.setState({ popupIsDisplayed: true, currentAttraction: event })
+    }
   }
 
   persistAttractionToBackend = (event) => {
@@ -85,7 +86,7 @@ class GeoMap extends Component {
   }
 
   render() {
-    console.log(this.props.attractions)
+    console.log(this.state)
     return (
       <Map
         className="map"
