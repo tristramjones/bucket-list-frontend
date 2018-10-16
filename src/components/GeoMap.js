@@ -78,7 +78,7 @@ class GeoMap extends Component {
           attribution={stamenTerrainAttr}
           url={stamenTerrainTiles}
         />
-      { this.props.attractions.map(a=><Marker position={ JSON.parse(a.position) }></Marker>) }
+      { this.props.attractions.map(a=><Marker key={a.id} position={ JSON.parse(a.position) }></Marker>) }
       </Map>
     );
   }
