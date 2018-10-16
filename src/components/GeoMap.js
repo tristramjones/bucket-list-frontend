@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
-// import CustomPopup from './CustomPopup'
 import L from 'leaflet'
+// import CustomPopup from './CustomPopup'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
 const stamenTerrainTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -20,19 +20,6 @@ class GeoMap extends Component {
   handleZoomLevelChange = (newZoomLevel) => {
     this.setState({ currentZoomLevel: newZoomLevel });
   }
-
-  // componentWillMount = () => {
-  //   const leafletMap = this.leafletMap.leafletElement;
-  //
-  //   fetch(`${BASE_URL}/attractions`)
-  //   .then(res=>res.json())
-  //   .then(attractions=>this.props.dispatchAllAttractions(attractions))
-  //   .then(res=>this.props.trips.map((t) => {
-  //     // const position = [JSON.parse(t.position).lat,JSON.parse(t.position).lng]
-  //     const position = L.marker([JSON.parse(t.position).lat,JSON.parse(t.position).lng]).addTo(leafletMap)
-  //     return <Marker position={ position }></Marker>
-  //   }))
-  // }
 
   componentDidMount() {
     const leafletMap = this.leafletMap.leafletElement;
@@ -76,7 +63,6 @@ class GeoMap extends Component {
   }
 
   render() {
-    console.log(this.props.attractions)
     return (
       <Map
         className="map"
@@ -119,18 +105,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(GeoMap);
-
-// <Popup>
-// <ArtworkPopup />
-// </Popup>
-//
-// { this.props.attractions.map(a => {
-//     return (
-//       <Marker
-//         key={a.id}
-//         position={[JSON.parse(a.position).lat,JSON.parse(a.position).lng]}
-//         >
-//       </Marker>
-//     )
-//   })
-// }
