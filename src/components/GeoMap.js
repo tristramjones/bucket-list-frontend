@@ -63,6 +63,7 @@ class GeoMap extends Component {
   }
 
   handlePopupDisplay = (event) => {
+    console.log('helllllooooooo')
     this.setState({
       popupIsDisplayed: !this.state.popupIsDisplayed,
       currentAttraction: event.target,
@@ -82,6 +83,7 @@ class GeoMap extends Component {
   }
 
   render() {
+    console.log(this.state.currentAttraction)
     return (
       <Map
         className="map"
