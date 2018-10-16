@@ -5,7 +5,9 @@ import '../App.css';
 const BASE_URL = 'http://localhost:3000/api/v1';
 
 class Search extends Component {
-  state = { input: '' };
+  state = {
+    input: ''
+  };
 
   handleInput = (event) => {
     this.setState({ input: event.target.value });

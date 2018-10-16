@@ -11,16 +11,13 @@ const stamenTerrainAttr = 'Map tiles by <a href="http://stamen.com">Stamen Desig
 const zoomLevel = 12;
 
 class GeoMap extends Component {
-  constructor() {
-    super();
-    this.state = {
-      currentZoomLevel: zoomLevel,
-      popupIsDisplayed: false,
-      currentAttraction: null,
-      popupTitle: '',
-      popupDescription: '',
-    };
-  }
+  state = {
+    currentZoomLevel: zoomLevel,
+    popupIsDisplayed: false,
+    currentAttraction: null,
+    popupTitle: '',
+    popupDescription: '',
+  };
 
   componentDidMount() {
     const leafletMap = this.leafletMap.leafletElement;
