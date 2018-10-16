@@ -1,9 +1,9 @@
 
 const defaultState = {
   currentTrip: null,
-  locations: [],
   trips: [],
-  attractions: []
+  locations: [],
+  attractions: [],
 }
 
 const reducer = (state=defaultState, action) => {

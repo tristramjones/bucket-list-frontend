@@ -97,7 +97,8 @@ class Search extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    locations: state.locations
+    locations: state.locations,
+    currentTrip: state.currentTrip,
   }
 }
 
@@ -114,7 +115,7 @@ const mapDispatchToProps = (dispatch) => {
         type: 'SET_CURRENT_TRIP',
         payload: currentTrip
       })
-    }
+    },
   };
 }
 

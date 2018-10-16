@@ -1,34 +1,28 @@
-import React, { Component } from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import React from 'react';
+import { Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
 
-const BASE_URL = 'http://localhost:3000/api/v1';
-
-class CustomPopup extends Component {
-
-  render() {
-    return (
-      <Popup>A pretty CSS3 popup.
-        <br />Easily customizable.
-      </Popup>
-    );
-  }
+const CustomPopup = () => {
+  return (
+    <Popup position={this.state.currentAttraction._latlng}>
+      <div className="popup-container">
+        <form onSubmit={this.persistAttractionChanges}>
+          <input
+            className="search-input"
+            onChange={this.handlePopupTitleChange}
+            placeholder="Title">
+          </input>
+          <input
+            className="search-input"
+            onChange={this.handlePopupDescriptionChange}
+            placeholder="Description">
+          </input>
+          <input
+            className="search-button"
+            type="Submit">
+          </input>
+        </form>
+      </div>
+    </Popup>
+  );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    locations: state.locations,
-    currentTrip: state.currentTrip,
-    trips: state.trips
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {}
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(CustomPopup);
-
-// <Popup>
-// <ArtworkPopup />
-// </Popup>
