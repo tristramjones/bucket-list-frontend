@@ -10,6 +10,7 @@ const ADD_LOCATION = 'ADD_LOCATION'
 const SET_CURRENT_TRIP = 'SET_CURRENT_TRIP'
 const SET_ALL_TRIPS = 'SET_ALL_TRIPS'
 const SET_ALL_ATTRACTIONS = 'SET_ALL_ATTRACTIONS'
+const ADD_ATTRACTION = 'ADD_ATTRACTION'
 
 const reducer = (state=defaultState, action) => {
   switch(action.type) {
@@ -21,6 +22,8 @@ const reducer = (state=defaultState, action) => {
       return { ...state, trips: action.payload }
     case SET_ALL_ATTRACTIONS:
       return { ...state, attractions: action.payload }
+    case ADD_ATTRACTION:
+      return { ...state, attractions: [...state.attractions,action.payload] }
     default:
       return state
   }

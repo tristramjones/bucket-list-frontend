@@ -32,17 +32,18 @@ class GeoMap extends Component {
   }
 
   handleMarkerCreation = (event) => {
-    const leafletMap = this.leafletMap.leafletElement;
-    const lat = event.latlng.lat
-    const lng = event.latlng.lng
-    const marker = L.marker([lat,lng]).addTo(leafletMap)
     this.setState({
       popupIsDisplayed: true,
-      currentAttraction: marker
+      currentAttraction: event
     })
   }
 
   persistAttractionToBackend = (event) => {
+    const title = this.state.popupTitle
+    const desc = this.state.popupDescription
+    const trip_id = this.props.currentTrip.id
+    const position = this.state.currentAttraction.latlng
+
     event.preventDefault();
     fetch(`${BASE_URL}/attractions`, {
       headers: {
@@ -51,19 +52,20 @@ class GeoMap extends Component {
       },
       method: 'POST',
       body: JSON.stringify({
-        title: this.state.popupTitle,
-        description: this.state.popupDescription,
-        trip_id: this.props.currentTrip.id,
-        position: JSON.stringify(this.state.currentAttraction._latlng)
+        title: title,
+        description: desc,
+        trip_id: trip_id,
+        position: JSON.stringify(position)
       })
     })
+    .then(res=>this.props.addAttraction(title,desc,trip_id,JSON.stringify(position)))
     .then(this.setState({
       popupIsDisplayed: false
     }))
   }
 
   handlePopupDisplay = (event) => {
-    console.log('helllllooooooo')
+    console.log(event.target)
     this.setState({
       popupIsDisplayed: !this.state.popupIsDisplayed,
       currentAttraction: event.target,
@@ -83,7 +85,7 @@ class GeoMap extends Component {
   }
 
   render() {
-    console.log(this.state.currentAttraction)
+    console.log(this.props.attractions)
     return (
       <Map
         className="map"
@@ -110,7 +112,7 @@ class GeoMap extends Component {
       }
       {
         this.state.popupIsDisplayed ?
-        <Popup position={this.state.currentAttraction._latlng}>
+        <Popup position={this.state.currentAttraction.latlng}>
           <div className="popup-container">
             <form onSubmit={this.persistAttractionToBackend}>
               <input
@@ -146,4 +148,20 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(GeoMap);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addAttraction: (title,desc,trip_id,position) => {
+      dispatch({
+        type: 'ADD_ATTRACTION',
+        payload: {
+          title: title,
+          description: desc,
+          trip_id: trip_id,
+          position: position
+        }
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(GeoMap);
