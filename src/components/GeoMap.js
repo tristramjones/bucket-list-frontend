@@ -76,6 +76,7 @@ class GeoMap extends Component {
   }
 
   render() {
+    console.log(this.props.attractions)
     return (
       <Map
         className="map"
@@ -91,6 +92,7 @@ class GeoMap extends Component {
           attribution={stamenTerrainAttr}
           url={stamenTerrainTiles}
         />
+      { this.props.attractions.map(a=><Marker position={ JSON.parse(a.position) }></Marker>) }
       </Map>
     );
   }
