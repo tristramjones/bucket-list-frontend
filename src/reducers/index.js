@@ -1,6 +1,5 @@
 
 const defaultState = {
-  togglePopup: true,
   currentTrip: null,
   trips: [],
   locations: [],
@@ -28,11 +27,6 @@ const reducer = (state=defaultState, action) => {
       return {
         ...state,
         attractions: action.payload
-      }
-    case 'TOGGLE_POPUP':
-      return {
-        ...state,
-        togglePopup: action.payload
       }
     default:
       return state

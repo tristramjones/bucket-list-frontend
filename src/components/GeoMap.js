@@ -14,7 +14,11 @@ class GeoMap extends Component {
   constructor() {
     super();
     this.state = {
-      currentZoomLevel: zoomLevel
+      currentZoomLevel: zoomLevel,
+      popupIsDisplayed: false,
+      currentAttraction: null,
+      popupTitleChange: '',
+      popupDescriptionChange: '',
     };
   }
 
@@ -62,13 +66,28 @@ class GeoMap extends Component {
     })
   }
 
-  handlePopup = (event) => {
-    this.props.togglePopup(this.props.togglePopup)
-    // event.target.bindPopup(`<CustomPopup />`).openPopup()
+  handlePopupDisplay = (event) => {
+    this.setState({
+      popupIsDisplayed: !this.state.popupIsDisplayed,
+      currentAttraction: event.target,
+    })
+  }
+
+  handlePopupTitleChange = (event) => {
+    this.setState({
+      popupTitleChange: event.target.value
+    })
+  }
+
+  handlePopupDescriptionChange = (event) => {
+    console.log(event.target.parentElement)
+    this.setState({
+      popupDescriptionChange: event.target.value
+    })
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.state.currentAttraction)
     return (
       <Map
         className="map"
@@ -85,15 +104,38 @@ class GeoMap extends Component {
           url={stamenTerrainTiles}
         />
       {
-        this.props.attractions.map( (a) =>
+        this.props.attractions.map(a =>
           <Marker
             key={a.id}
             position={ JSON.parse(a.position) }
-            onClick={ this.handlePopup }>
+            onClick={ this.handlePopupDisplay }>
           </Marker>
         )
       }
-      { this.props.openPopup ? <CustomPopup /> : null }
+      {
+        this.state.popupIsDisplayed ?
+        <Popup position={this.state.currentAttraction._latlng}>
+          <div className="popup-container">
+            <form onSubmit={this.persistAttractionChanges}>
+              <input
+                className="search-input"
+                onChange={this.handlePopupTitleChange}
+                placeholder="Title">
+              </input>
+              <input
+                className="search-input"
+                onChange={this.handlePopupDescriptionChange}
+                placeholder="Description">
+              </input>
+              <input
+                className="search-button"
+                type="Submit">
+              </input>
+            </form>
+          </div>
+        </Popup>
+        : null
+      }
       </Map>
     );
   }
@@ -105,7 +147,6 @@ const mapStateToProps = (state) => {
     currentTrip: state.currentTrip,
     trips: state.trips,
     attractions: state.attractions,
-    togglePopup: state.togglePopup,
   }
 }
 
@@ -117,12 +158,6 @@ const mapDispatchToProps = (dispatch) => {
         payload: attractions
       })
     },
-    togglePopup: (currentStatus) => {
-      dispatch({
-        type: 'TOGGLE_POPUP',
-        payload: !currentStatus
-      })
-    }
   }
 }
 

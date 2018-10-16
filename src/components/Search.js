@@ -99,7 +99,6 @@ const mapStateToProps = (state) => {
   return {
     locations: state.locations,
     currentTrip: state.currentTrip,
-    togglePopup: state.togglePopup,
   }
 }
 
@@ -116,7 +115,7 @@ const mapDispatchToProps = (dispatch) => {
         type: 'SET_CURRENT_TRIP',
         payload: currentTrip
       })
-    }
+    },
   };
 }
 
