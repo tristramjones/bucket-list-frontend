@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
 import L from 'leaflet'
-import { CustomPopup } from './CustomPopup'
+// import { CustomPopup } from './CustomPopup'
 import '../App.css'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
@@ -17,8 +17,8 @@ class GeoMap extends Component {
       currentZoomLevel: zoomLevel,
       popupIsDisplayed: false,
       currentAttraction: null,
-      popupTitleChange: '',
-      popupDescriptionChange: '',
+      popupTitle: '',
+      popupDescription: '',
     };
   }
 
@@ -28,13 +28,6 @@ class GeoMap extends Component {
       const updatedZoomLevel = leafletMap.getZoom();
       this.handleZoomLevelChange(updatedZoomLevel);
     });
-
-    fetch(`${BASE_URL}/attractions`)
-    .then(res=>res.json())
-    .then(attractions=>this.props.dispatchAllAttractions(attractions))
-    .then(res=>this.props.trips.map((t) => {
-      return L.marker([JSON.parse(t.position).lat,JSON.parse(t.position).lng]).addTo(leafletMap)
-    }))
   }
 
   handleZoomLevelChange = (newZoomLevel) => {
@@ -46,11 +39,11 @@ class GeoMap extends Component {
     const lat = event.latlng.lat
     const lng = event.latlng.lng
     const marker = L.marker([lat,lng]).addTo(leafletMap)
-    this.persistAttractionToBackend(marker)
     return marker
   }
 
-  persistAttractionToBackend = (marker) => {
+  persistAttractionToBackend = (event) => {
+    event.preventDefault();
     fetch(`${BASE_URL}/attractions`, {
       headers: {
         'Accept': 'application/json',
@@ -58,12 +51,15 @@ class GeoMap extends Component {
       },
       method: 'POST',
       body: JSON.stringify({
-        title: '',
-        description: '',
+        title: this.state.popupTitle,
+        description: this.state.popupDescription,
         trip_id: this.props.currentTrip.id,
-        position: JSON.stringify(marker._latlng)
+        position: JSON.stringify(this.state.currentAttraction._latlng)
       })
     })
+    .then(this.setState({
+      popupIsDisplayed: false
+    }))
   }
 
   handlePopupDisplay = (event) => {
@@ -75,19 +71,17 @@ class GeoMap extends Component {
 
   handlePopupTitleChange = (event) => {
     this.setState({
-      popupTitleChange: event.target.value
+      popupTitle: event.target.value
     })
   }
 
   handlePopupDescriptionChange = (event) => {
-    console.log(event.target.parentElement)
     this.setState({
-      popupDescriptionChange: event.target.value
+      popupDescription: event.target.value
     })
   }
 
   render() {
-    console.log(this.state.currentAttraction)
     return (
       <Map
         className="map"
@@ -116,7 +110,7 @@ class GeoMap extends Component {
         this.state.popupIsDisplayed ?
         <Popup position={this.state.currentAttraction._latlng}>
           <div className="popup-container">
-            <form onSubmit={this.persistAttractionChanges}>
+            <form onSubmit={this.persistAttractionToBackend}>
               <input
                 className="search-input"
                 onChange={this.handlePopupTitleChange}
@@ -150,15 +144,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatchAllAttractions: (attractions) => {
-      dispatch({
-        type: 'SET_ALL_ATTRACTIONS',
-        payload: attractions
-      })
-    },
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(GeoMap);
+export default connect(mapStateToProps)(GeoMap);

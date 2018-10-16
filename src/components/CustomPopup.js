@@ -1,14 +1,28 @@
 import React from 'react';
 import { Popup } from 'react-leaflet';
+import { connect } from 'react-redux';
 
-export const CustomPopup = () => {
+const CustomPopup = () => {
   return (
-    <Popup className="custom-popup">
-      <form>
-        <input placeholder="Title"></input>
-        <input placeholder="Description"></input>
-        <input className="search-button" type="Submit"></input>
-      </form>
+    <Popup position={this.state.currentAttraction._latlng}>
+      <div className="popup-container">
+        <form onSubmit={this.persistAttractionChanges}>
+          <input
+            className="search-input"
+            onChange={this.handlePopupTitleChange}
+            placeholder="Title">
+          </input>
+          <input
+            className="search-input"
+            onChange={this.handlePopupDescriptionChange}
+            placeholder="Description">
+          </input>
+          <input
+            className="search-button"
+            type="Submit">
+          </input>
+        </form>
+      </div>
     </Popup>
   );
 }
