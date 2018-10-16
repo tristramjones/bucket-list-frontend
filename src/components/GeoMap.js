@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
 import L from 'leaflet'
-// import { CustomPopup } from './CustomPopup'
+import NewPopup from './NewPopup'
 import '../App.css'
 
-const BASE_URL = 'http://localhost:3000/api/v1';
 const stamenTerrainTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const stamenTerrainAttr = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 const zoomLevel = 12;
@@ -13,10 +12,6 @@ const zoomLevel = 12;
 class GeoMap extends Component {
   state = {
     currentZoomLevel: zoomLevel,
-    popupIsDisplayed: false,
-    currentAttraction: null,
-    popupTitle: '',
-    popupDescription: '',
   };
 
   componentDidMount() {
@@ -32,57 +27,12 @@ class GeoMap extends Component {
   }
 
   handleMarkerCreation = (event) => {
-    if(this.state.popupIsDisplayed) {
-      this.setState({ popupIsDisplayed: false })
+    if(this.props.isPopupDisplayed) {
+      this.props.popupToggle(false)
     } else {
-      this.setState({ popupIsDisplayed: true, currentAttraction: event })
+      this.props.currentAttraction(event)
+      this.props.popupToggle(true)
     }
-  }
-
-  persistAttractionToBackend = (event) => {
-    const title = this.state.popupTitle
-    const desc = this.state.popupDescription
-    const trip_id = this.props.currentTrip.id
-    const position = this.state.currentAttraction.latlng
-
-    event.preventDefault();
-    fetch(`${BASE_URL}/attractions`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        title: title,
-        description: desc,
-        trip_id: trip_id,
-        position: JSON.stringify(position)
-      })
-    })
-    .then(res=>this.props.addAttraction(title,desc,trip_id,JSON.stringify(position)))
-    .then(this.setState({
-      popupIsDisplayed: false
-    }))
-  }
-
-  handlePopupDisplay = (event) => {
-    console.log(event.target)
-    this.setState({
-      popupIsDisplayed: !this.state.popupIsDisplayed,
-      currentAttraction: event.target,
-    })
-  }
-
-  handlePopupTitleChange = (event) => {
-    this.setState({
-      popupTitle: event.target.value
-    })
-  }
-
-  handlePopupDescriptionChange = (event) => {
-    this.setState({
-      popupDescription: event.target.value
-    })
   }
 
   render() {
@@ -111,30 +61,7 @@ class GeoMap extends Component {
           </Marker>
         )
       }
-      {
-        this.state.popupIsDisplayed ?
-        <Popup position={this.state.currentAttraction.latlng}>
-          <div className="popup-container">
-            <form onSubmit={this.persistAttractionToBackend}>
-              <input
-                className="search-input"
-                onChange={this.handlePopupTitleChange}
-                placeholder="Title">
-              </input>
-              <input
-                className="search-input"
-                onChange={this.handlePopupDescriptionChange}
-                placeholder="Description">
-              </input>
-              <input
-                className="search-button"
-                type="Submit">
-              </input>
-            </form>
-          </div>
-        </Popup>
-        : null
-      }
+      { this.props.isPopupDisplayed ? <NewPopup /> : null }
       </Map>
     );
   }
@@ -146,6 +73,8 @@ const mapStateToProps = (state) => {
     currentTrip: state.currentTrip,
     trips: state.trips,
     attractions: state.attractions,
+    currentAttraction: state.currentAttraction,
+    isPopupDisplayed: state.isPopupDisplayed,
   }
 }
 
@@ -160,6 +89,18 @@ const mapDispatchToProps = (dispatch) => {
           trip_id: trip_id,
           position: position
         }
+      })
+    },
+    currentAttraction: (event) => {
+      dispatch({
+        type: 'CURRENT_ATTRACTION',
+        payload: { event }
+      })
+    },
+    popupToggle: (toggle) => {
+      dispatch({
+        type: 'TOGGLE_POPUP',
+        payload: { toggle }
       })
     }
   }
