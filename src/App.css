@@ -55,6 +55,11 @@
   border-radius: 1px;
 }
 
+.custom-popup {
+  width: 150px;
+  height: 150px;
+}
+
 .leaflet-container {
   margin: 0 auto;
   height: 400px;

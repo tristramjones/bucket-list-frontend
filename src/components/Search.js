@@ -97,7 +97,9 @@ class Search extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    locations: state.locations
+    locations: state.locations,
+    currentTrip: state.currentTrip,
+    togglePopup: state.togglePopup,
   }
 }
 
