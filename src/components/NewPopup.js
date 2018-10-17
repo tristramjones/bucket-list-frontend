@@ -10,7 +10,7 @@ class NewPopup extends Component {
     popupDescription: '',
   };
 
-  persistAttractionToBackend = (event) => {
+  persistAttraction = (event) => {
     event.preventDefault();
 
     const title = this.state.popupTitle
@@ -44,22 +44,23 @@ class NewPopup extends Component {
     return (
       <Popup position={this.props.currentAttraction.event.latlng}>
         <div className="popup-container">
-          <form onSubmit={this.persistAttractionToBackend}>
+          <form onSubmit={this.persistAttraction}>
             <input
               data-label="popupTitle"
-              className="search-input"
+              className="popup-input"
               onChange={this.handleFormFieldChange}
               placeholder="Title">
             </input>
             <input
               data-label="popupDescription"
-              className="search-input"
+              className="popup-input"
               onChange={this.handleFormFieldChange}
               placeholder="Description">
             </input>
             <input
-              className="search-button"
-              type="Submit">
+              className="popup-button"
+              type="submit"
+              value="Save">
             </input>
           </form>
         </div>
@@ -92,17 +93,7 @@ const mapDispatchToProps = (dispatch) => {
           position: position
         }
       })
-      // dispatch({
-      //   type: 'TOGGLE_NEW_POPUP',
-      //   payload: toggle
-      // })
     },
-    // popupToggle: (toggle) => {
-    //   dispatch({
-    //     type: 'TOGGLE_POPUP',
-    //     payload: toggle
-    //   })
-    // },
   }
 }
 

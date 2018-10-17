@@ -26,7 +26,7 @@ class GeoMap extends Component {
     this.setState({ currentZoomLevel: newZoomLevel });
   }
 
-  handlePopups = (event) => {
+  handlePopupToggles = (event) => {
     if(this.props.isNewPopupDisplayed) {
       this.props.newPopupToggle(false)
     } else {
@@ -36,7 +36,7 @@ class GeoMap extends Component {
     this.props.basicPopupToggle(false)
   }
 
-  handlePopupDisplay = (event) => {
+  handleBasicPopupDisplay = (event) => {
     const marker = this.props.attractions.find(a=>{
       return JSON.parse(a.position).lat === event.latlng.lat && JSON.parse(a.position).lng === event.latlng.lng
     })
@@ -54,7 +54,7 @@ class GeoMap extends Component {
           this.props.locations[this.props.locations.length-1].lon]
         }
         zoom={zoomLevel}
-        onClick={this.handlePopups}
+        onClick={this.handlePopupToggles}
       >
         <TileLayer
           attribution={stamenTerrainAttr}
@@ -65,7 +65,7 @@ class GeoMap extends Component {
           <Marker
             key={a.id}
             position={ JSON.parse(a.position) }
-            onClick={ this.handlePopupDisplay }>
+            onClick={ this.handleBasicPopupDisplay }>
           </Marker>
         )
       }
@@ -79,8 +79,6 @@ class GeoMap extends Component {
 const mapStateToProps = (state) => {
   return {
     locations: state.locations,
-    currentTrip: state.currentTrip,
-    trips: state.trips,
     attractions: state.attractions,
     currentAttraction: state.currentAttraction,
     isNewPopupDisplayed: state.isNewPopupDisplayed,

@@ -75,7 +75,7 @@ class Search extends Component {
   render() {
     return (
       <div className="search-container">
-        <h2>Plan Your Next Adventure</h2>
+        <h3>Plan Your Next Adventure</h3>
         <div>
           <form>
             <input

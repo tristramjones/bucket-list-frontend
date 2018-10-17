@@ -6,32 +6,73 @@ const BASE_URL = 'http://localhost:3000/api/v1';
 
 class BasicPopup extends Component {
   state = {
-    popupTitle: '',
-    popupDescription: '',
+    popupTitle: this.props.currentMarker.title,
+    popupDescription: this.props.currentMarker.description,
+    editPopup: false,
   };
 
+  handleEditPopup = (event) => {
+    this.setState({ editPopup: !this.state.editPopup })
+  }
+
+  handleFormFieldChange = (event) => {
+    this.setState({
+      [event.target.dataset.label]: event.target.value
+    })
+  }
+
+  persistChanges = (event) => {
+    event.preventDefault();
+
+    fetch(`${BASE_URL}/attractions/${this.props.currentMarker.id}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        title: this.state.popupTitle,
+        description: this.state.popupDescription,
+        trip_id: this.props.currentMarker.trip_id,
+        position: this.props.currentMarker.position
+      })
+    })
+    .then(this.setState({ editPopup: false }))
+  }
+
   render() {
-    console.log(this.props.currentMarker)
-    console.log(this.props.isBasicPopupDisplayed)
     return (
+      this.state.editPopup
+      ?
       <Popup position={JSON.parse(this.props.currentMarker.position)}>
         <div className="popup-container">
-          <form>
+          <form onSubmit={this.persistChanges}>
             <input
               data-label="popupTitle"
-              className="search-input"
-              placeholder={this.props.currentMarker.title}>
+              className="popup-input"
+              onChange={this.handleFormFieldChange}
+              value={this.state.popupTitle}>
             </input>
             <input
               data-label="popupDescription"
-              className="search-input"
-              placeholder={this.props.currentMarker.description}>
+              className="popup-input"
+              onChange={this.handleFormFieldChange}
+              value={this.state.popupDescription}>
             </input>
             <input
-              className="search-button"
-              type="Submit">
+              className="popup-button"
+              type="submit"
+              value="Save">
             </input>
           </form>
+        </div>
+      </Popup>
+      :
+      <Popup position={JSON.parse(this.props.currentMarker.position)}>
+        <div className="popup-container">
+          <h2 className="popup-title">{this.props.currentMarker.title}</h2>
+          <p className="popup-description">{this.props.currentMarker.description}</p>
+          <button className="search-button" onClick={this.handleEditPopup}>Edit</button>
         </div>
       </Popup>
     );
@@ -46,10 +87,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(BasicPopup);
+export default connect(mapStateToProps)(BasicPopup);

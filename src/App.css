@@ -2,6 +2,19 @@
   box-sizing: border-box;
 }
 
+.leaflet-container {
+  margin: 0 auto;
+  height: 400px;
+  width: 67%;
+  border: 1px solid #ccc;
+  border-radius: 1px;
+}
+
+#mapid {
+  height: 100%;
+  width: 100%;
+}
+
 .header {
   background-color: #292C34;
   height: 50px;
@@ -32,7 +45,7 @@
   border: 1px solid #ccc;
   border-radius: 1px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   font-family: 'Raleway', sans-serif;
 }
 
@@ -44,7 +57,7 @@
   border-radius: 1px;
   background-color: #42c5f4;
   color: #292C34;
-  font-size: 14px;
+  font-size: 16px;
   font-family: 'Raleway', sans-serif;
 }
 
@@ -60,34 +73,41 @@
   height: 200px;
 }
 
-.leaflet-container {
-  margin: 0 auto;
-  height: 400px;
-  width: 67%;
+.popup-title {
+  font-size: 28px;
+}
+
+.popup-description {
+  font-size: 16px;
+}
+
+.popup-input {
+  width: 200px;
+  height: 40px;
+  margin: 10px auto;
   border: 1px solid #ccc;
   border-radius: 1px;
+  text-align: center;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
 }
 
-#mapid {
-  height: 100%;
-  width: 100%;
+.popup-button {
+  width: 200px;
+  height: 40px;
+  margin: 20px 0 20px 0;
+  border: none;
+  border-radius: 1px;
+  background-color: #42c5f4;
+  color: #292C34;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+  align-self: baseline;
 }
 
-
-/* .main-menu {
-height: 80vh;
-min-height: 80vh;
-background-color: #ccc;
-grid-column: 1 / 2;
-z-index: 1;
-overflow-x: hidden;
-padding: 30px 30px;
+.popup-button:hover {
+  background-color: white;
+  color: #42c5f4;
+  border: 1px solid #42c5f4;
+  border-radius: 1px;
 }
-
-.menu-heading {
-margin-bottom: 20px;
-}
-
-.locations-list {
-list-style: none;
-} */
