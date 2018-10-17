@@ -93,6 +93,10 @@ const mapDispatchToProps = (dispatch) => {
           position: position
         }
       })
+      dispatch({
+        type: 'TOGGLE_NEW_POPUP',
+        payload: toggle
+      })
     },
   }
 }

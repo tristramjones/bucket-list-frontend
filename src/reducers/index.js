@@ -19,6 +19,7 @@ const CURRENT_ATTRACTION = 'CURRENT_ATTRACTION'
 const TOGGLE_NEW_POPUP = 'TOGGLE_NEW_POPUP'
 const TOGGLE_BASIC_POPUP = 'TOGGLE_BASIC_POPUP'
 const CURRENT_MARKER =  'CURRENT_MARKER'
+// const EDIT_ATTRACTION = 'EDIT_ATTRACTION'
 
 const reducer = (state=defaultState, action) => {
   switch(action.type) {
@@ -31,7 +32,7 @@ const reducer = (state=defaultState, action) => {
     case SET_ALL_ATTRACTIONS:
       return { ...state, attractions: action.payload }
     case ADD_ATTRACTION:
-      return { ...state, attractions: [...state.attractions,action.payload] }
+      return { ...state, attractions: [...state.attractions, action.payload] }
     case CURRENT_ATTRACTION:
       return { ...state, currentAttraction: action.payload }
     case TOGGLE_NEW_POPUP:
@@ -40,6 +41,8 @@ const reducer = (state=defaultState, action) => {
       return { ...state, isBasicPopupDisplayed: action.payload }
     case CURRENT_MARKER:
       return { ...state, currentMarker: action.payload }
+    // case EDIT_ATTRACTION:
+    //   return { ...state, attractions: [...state.attractions, action.payload] }
     default:
       return state
   }

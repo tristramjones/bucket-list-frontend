@@ -60,17 +60,17 @@ class GeoMap extends Component {
           attribution={stamenTerrainAttr}
           url={stamenTerrainTiles}
         />
-      {
-        this.props.attractions.map(a =>
-          <Marker
-            key={a.id}
-            position={ JSON.parse(a.position) }
-            onClick={ this.handleBasicPopupDisplay }>
-          </Marker>
-        )
-      }
-      { this.props.isNewPopupDisplayed ? <NewPopup /> : null }
-      { this.props.isBasicPopupDisplayed ? <BasicPopup /> : null }
+        {
+          this.props.attractions.map(a =>
+            <Marker
+              key={a.id}
+              position={ JSON.parse(a.position) }
+              onClick={ this.handleBasicPopupDisplay }>
+            </Marker>
+          )
+        }
+        { this.props.isNewPopupDisplayed ? <NewPopup /> : null }
+        { this.props.isBasicPopupDisplayed ? <BasicPopup /> : null }
       </Map>
     );
   }

@@ -37,7 +37,8 @@ class BasicPopup extends Component {
         position: this.props.currentMarker.position
       })
     })
-    .then(this.setState({ editPopup: false }))
+    .then(res=>this.setState({ editPopup: false }))
+    // .then(res=>this.props.editAttraction(this.state.popupTitle,this.state.popupDescription,this.props.currentMarker))
   }
 
   render() {
@@ -87,4 +88,15 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(BasicPopup);
+// const mapDispatchToProps = (state) => {
+//   return {
+//     editAttraction: (title,desc,marker) {
+//       dispatch({
+//         type: EDIT_ATTRACTION,
+//         payload:
+//       })
+//     }
+//   }
+// }
+
+export default connect(mapStateToProps,mapDispatchToProps)(BasicPopup);
