@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker } from 'react-leaflet';
 import { connect } from 'react-redux';
-import L from 'leaflet'
 import NewPopup from './NewPopup'
 import '../App.css'
 
@@ -26,7 +25,7 @@ class GeoMap extends Component {
     this.setState({ currentZoomLevel: newZoomLevel });
   }
 
-  handleMarkerCreation = (event) => {
+  handlePopup = (event) => {
     if(this.props.isPopupDisplayed) {
       this.props.popupToggle(false)
     } else {
@@ -36,7 +35,7 @@ class GeoMap extends Component {
   }
 
   render() {
-    console.log(this.state)
+    console.log(this.props.isPopupDisplayed)
     return (
       <Map
         className="map"
@@ -46,7 +45,7 @@ class GeoMap extends Component {
           this.props.locations[this.props.locations.length-1].lon]
         }
         zoom={zoomLevel}
-        onClick={this.handleMarkerCreation}
+        onClick={this.handlePopup}
       >
         <TileLayer
           attribution={stamenTerrainAttr}
@@ -80,17 +79,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addAttraction: (title,desc,trip_id,position) => {
-      dispatch({
-        type: 'ADD_ATTRACTION',
-        payload: {
-          title: title,
-          description: desc,
-          trip_id: trip_id,
-          position: position
-        }
-      })
-    },
     currentAttraction: (event) => {
       dispatch({
         type: 'CURRENT_ATTRACTION',
@@ -100,7 +88,7 @@ const mapDispatchToProps = (dispatch) => {
     popupToggle: (toggle) => {
       dispatch({
         type: 'TOGGLE_POPUP',
-        payload: { toggle }
+        payload: toggle
       })
     }
   }

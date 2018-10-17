@@ -31,15 +31,7 @@ class NewPopup extends Component {
         position: JSON.stringify(position)
       })
     })
-    .then(res=>this.props.addAttraction(title,desc,trip_id,JSON.stringify(position)))
-    .then(this.props.popupToggle(false))
-  }
-
-  handlePopupDisplay = (event) => {
-    this.setState({
-      popupIsDisplayed: !this.state.popupIsDisplayed,
-      currentAttraction: event.target,
-    })
+    .then(res=>this.props.addAttraction(title,desc,trip_id,JSON.stringify(position),false))
   }
 
   handlePopupTitleChange = (event) => {
@@ -88,12 +80,13 @@ const mapStateToProps = (state) => {
     trips: state.trips,
     attractions: state.attractions,
     currentAttraction: state.currentAttraction,
+    isPopupDisplayed: state.isPopupDisplayed,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addAttraction: (title,desc,trip_id,position) => {
+    addAttraction: (title,desc,trip_id,position,toggle) => {
       dispatch({
         type: 'ADD_ATTRACTION',
         payload: {
@@ -103,11 +96,15 @@ const mapDispatchToProps = (dispatch) => {
           position: position
         }
       })
+      dispatch({
+        type: 'TOGGLE_POPUP',
+        payload: toggle
+      })
     },
     popupToggle: (toggle) => {
       dispatch({
         type: 'TOGGLE_POPUP',
-        payload: { toggle }
+        payload: toggle
       })
     },
   }
