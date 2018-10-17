@@ -6,6 +6,8 @@ const defaultState = {
   attractions: [],
   currentAttraction: null,
   isPopupDisplayed: false,
+  isBasicPopupDisplayed: false,
+  currentMarker: null,
 }
 
 const ADD_LOCATION = 'ADD_LOCATION'
@@ -15,6 +17,8 @@ const SET_ALL_ATTRACTIONS = 'SET_ALL_ATTRACTIONS'
 const ADD_ATTRACTION = 'ADD_ATTRACTION'
 const CURRENT_ATTRACTION = 'CURRENT_ATTRACTION'
 const TOGGLE_POPUP = 'TOGGLE_POPUP'
+const TOGGLE_BASIC_POPUP = 'TOGGLE_BASIC_POPUP'
+const CURRENT_MARKER =  'CURRENT_MARKER'
 
 const reducer = (state=defaultState, action) => {
   switch(action.type) {
@@ -32,6 +36,10 @@ const reducer = (state=defaultState, action) => {
       return { ...state, currentAttraction: action.payload }
     case TOGGLE_POPUP:
       return { ...state, isPopupDisplayed: action.payload }
+    case TOGGLE_BASIC_POPUP:
+      return { ...state, isBasicPopupDisplayed: action.payload }
+    case CURRENT_MARKER:
+      return { ...state, currentMarker: action.payload }
     default:
       return state
   }

@@ -34,31 +34,28 @@ class NewPopup extends Component {
     .then(res=>this.props.addAttraction(title,desc,trip_id,JSON.stringify(position),false))
   }
 
-  handlePopupTitleChange = (event) => {
+  handleFormFieldChange = (event) => {
     this.setState({
-      popupTitle: event.target.value
-    })
-  }
-
-  handlePopupDescriptionChange = (event) => {
-    this.setState({
-      popupDescription: event.target.value
+      [event.target.dataset.label]: event.target.value
     })
   }
 
   render() {
+    console.log(this.props.currentAttraction.event.latlng)
     return (
       <Popup position={this.props.currentAttraction.event.latlng}>
         <div className="popup-container">
           <form onSubmit={this.persistAttractionToBackend}>
             <input
+              data-label="popupTitle"
               className="search-input"
-              onChange={this.handlePopupTitleChange}
+              onChange={this.handleFormFieldChange}
               placeholder="Title">
             </input>
             <input
+              data-label="popupDescription"
               className="search-input"
-              onChange={this.handlePopupDescriptionChange}
+              onChange={this.handleFormFieldChange}
               placeholder="Description">
             </input>
             <input
