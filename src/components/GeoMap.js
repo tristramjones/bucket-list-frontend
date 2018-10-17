@@ -26,13 +26,14 @@ class GeoMap extends Component {
     this.setState({ currentZoomLevel: newZoomLevel });
   }
 
-  handleNewPopup = (event) => {
-    if(this.props.isPopupDisplayed) {
-      this.props.popupToggle(false)
+  handlePopups = (event) => {
+    if(this.props.isNewPopupDisplayed) {
+      this.props.newPopupToggle(false)
     } else {
       this.props.currentAttraction(event)
-      this.props.popupToggle(true)
+      this.props.newPopupToggle(true)
     }
+    this.props.basicPopupToggle(false)
   }
 
   handlePopupDisplay = (event) => {
@@ -40,6 +41,7 @@ class GeoMap extends Component {
       return JSON.parse(a.position).lat === event.latlng.lat && JSON.parse(a.position).lng === event.latlng.lng
     })
     this.props.markerSelected(marker)
+    this.props.basicPopupToggle(true)
   }
 
   render() {
@@ -52,7 +54,7 @@ class GeoMap extends Component {
           this.props.locations[this.props.locations.length-1].lon]
         }
         zoom={zoomLevel}
-        onClick={this.handleNewPopup}
+        onClick={this.handlePopups}
       >
         <TileLayer
           attribution={stamenTerrainAttr}
@@ -67,8 +69,8 @@ class GeoMap extends Component {
           </Marker>
         )
       }
-      { this.props.isPopupDisplayed ? <NewPopup /> : null }
-      { this.props.currentMarker ? <BasicPopup /> : null }
+      { this.props.isNewPopupDisplayed ? <NewPopup /> : null }
+      { this.props.isBasicPopupDisplayed ? <BasicPopup /> : null }
       </Map>
     );
   }
@@ -81,7 +83,7 @@ const mapStateToProps = (state) => {
     trips: state.trips,
     attractions: state.attractions,
     currentAttraction: state.currentAttraction,
-    isPopupDisplayed: state.isPopupDisplayed,
+    isNewPopupDisplayed: state.isNewPopupDisplayed,
     isBasicPopupDisplayed: state.isBasicPopupDisplayed,
     currentMarker: state.currentMarker,
   }
@@ -95,22 +97,24 @@ const mapDispatchToProps = (dispatch) => {
         payload: { event }
       })
     },
-    popupToggle: (toggle) => {
+    newPopupToggle: (toggle) => {
       dispatch({
-        type: 'TOGGLE_POPUP',
+        type: 'TOGGLE_NEW_POPUP',
         payload: toggle
       })
     },
     markerSelected: (marker) => {
       dispatch({
-        type: 'TOGGLE_BASIC_POPUP',
-        payload: true
-      })
-      dispatch({
         type: 'CURRENT_MARKER',
         payload: marker
       })
-    }
+    },
+    basicPopupToggle: (toggle) => {
+      dispatch({
+        type: 'TOGGLE_BASIC_POPUP',
+        payload: toggle
+      })
+    },
   }
 }
 

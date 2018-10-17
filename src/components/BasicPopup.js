@@ -12,6 +12,7 @@ class BasicPopup extends Component {
 
   render() {
     console.log(this.props.currentMarker)
+    console.log(this.props.isBasicPopupDisplayed)
     return (
       <Popup position={JSON.parse(this.props.currentMarker.position)}>
         <div className="popup-container">

@@ -41,7 +41,6 @@ class NewPopup extends Component {
   }
 
   render() {
-    console.log(this.props.currentAttraction.event.latlng)
     return (
       <Popup position={this.props.currentAttraction.event.latlng}>
         <div className="popup-container">
@@ -77,7 +76,7 @@ const mapStateToProps = (state) => {
     trips: state.trips,
     attractions: state.attractions,
     currentAttraction: state.currentAttraction,
-    isPopupDisplayed: state.isPopupDisplayed,
+    isNewPopupDisplayed: state.isNewPopupDisplayed,
   }
 }
 
@@ -93,17 +92,17 @@ const mapDispatchToProps = (dispatch) => {
           position: position
         }
       })
-      dispatch({
-        type: 'TOGGLE_POPUP',
-        payload: toggle
-      })
+      // dispatch({
+      //   type: 'TOGGLE_NEW_POPUP',
+      //   payload: toggle
+      // })
     },
-    popupToggle: (toggle) => {
-      dispatch({
-        type: 'TOGGLE_POPUP',
-        payload: toggle
-      })
-    },
+    // popupToggle: (toggle) => {
+    //   dispatch({
+    //     type: 'TOGGLE_POPUP',
+    //     payload: toggle
+    //   })
+    // },
   }
 }
 

@@ -5,7 +5,7 @@ const defaultState = {
   trips: [],
   attractions: [],
   currentAttraction: null,
-  isPopupDisplayed: false,
+  isNewPopupDisplayed: false,
   isBasicPopupDisplayed: false,
   currentMarker: null,
 }
@@ -16,7 +16,7 @@ const SET_ALL_TRIPS = 'SET_ALL_TRIPS'
 const SET_ALL_ATTRACTIONS = 'SET_ALL_ATTRACTIONS'
 const ADD_ATTRACTION = 'ADD_ATTRACTION'
 const CURRENT_ATTRACTION = 'CURRENT_ATTRACTION'
-const TOGGLE_POPUP = 'TOGGLE_POPUP'
+const TOGGLE_NEW_POPUP = 'TOGGLE_NEW_POPUP'
 const TOGGLE_BASIC_POPUP = 'TOGGLE_BASIC_POPUP'
 const CURRENT_MARKER =  'CURRENT_MARKER'
 
@@ -34,8 +34,8 @@ const reducer = (state=defaultState, action) => {
       return { ...state, attractions: [...state.attractions,action.payload] }
     case CURRENT_ATTRACTION:
       return { ...state, currentAttraction: action.payload }
-    case TOGGLE_POPUP:
-      return { ...state, isPopupDisplayed: action.payload }
+    case TOGGLE_NEW_POPUP:
+      return { ...state, isNewPopupDisplayed: action.payload }
     case TOGGLE_BASIC_POPUP:
       return { ...state, isBasicPopupDisplayed: action.payload }
     case CURRENT_MARKER:
