@@ -11,7 +11,6 @@ const defaultState = {
 }
 
 const reducer = (state=defaultState, action) => {
-  console.log(action.type)
   switch(action.type) {
     case 'SET_CURRENT_TRIP':
       return { ...state, currentTrip: action.payload }

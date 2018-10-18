@@ -43,7 +43,6 @@ class BasicPopup extends Component {
   }
 
   handleDeleteAttraction = (event) => {
-    console.log(this.props.currentMarker)
     fetch(`${BASE_URL}/attractions/${this.props.currentMarker.id}`, {
       headers: {
         'Accept': 'application/json',
@@ -51,7 +50,12 @@ class BasicPopup extends Component {
       },
       method: 'DELETE'
     })
-    .then(res=>console.log(res))
+    const currentAttraction = this.props.attractions.find(a=>a.id===this.props.currentMarker.id)
+    const index = this.props.attractions.indexOf(currentAttraction)
+    const newAttractions = this.props.attractions
+    newAttractions.splice(index,1)
+    this.props.deleteAttraction(newAttractions)
+    this.props.basicPopupToggle(false)
   }
 
   render() {
@@ -109,6 +113,7 @@ class BasicPopup extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    attractions: state.attractions,
     isBasicPopupDisplayed: state.isBasicPopupDisplayed,
     currentMarker: state.currentMarker,
   }

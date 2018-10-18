@@ -37,8 +37,8 @@ export const setCurrentTrip = (currentTrip) => (dispatch) => {
   dispatch({ type: SET_CURRENT_TRIP, payload: currentTrip })
 }
 
-export const deleteAttraction = (attraction, allAttractions) => (dispatch) => {
-  dispatch({ type: DELETE_ATTRACTION, payload: allAttractions })
+export const deleteAttraction = (attractions) => (dispatch) => {
+  dispatch({ type: DELETE_ATTRACTION, payload: attractions })
 }
 
 export const getAllAttractions = () => (dispatch) => {

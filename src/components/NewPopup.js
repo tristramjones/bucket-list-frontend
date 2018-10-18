@@ -17,7 +17,7 @@ class NewPopup extends Component {
     const title = this.state.popupTitle
     const desc = this.state.popupDescription
     const trip_id = this.props.currentTrip.id
-    const position = this.props.currentAttraction.event.latlng
+    const position = this.props.currentAttraction.latlng
 
     fetch(`${BASE_URL}/attractions`, {
       headers: {
@@ -42,7 +42,6 @@ class NewPopup extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <Popup position={this.props.currentAttraction.latlng}>
         <div className="popup-container">
