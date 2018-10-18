@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
+import * as actions from '../actions'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
 
@@ -23,7 +24,7 @@ class BasicPopup extends Component {
 
   persistChanges = (event) => {
     event.preventDefault();
-    console.log(this.props.currentMarker)
+
     fetch(`${BASE_URL}/attractions/${this.props.currentMarker.id}`, {
       headers: {
         'Accept': 'application/json',
@@ -38,15 +39,10 @@ class BasicPopup extends Component {
       })
     })
     .then(res=>this.setState({ editPopup: false }))
-    .then(res=> {
-      return fetch(`${BASE_URL}/attractions`)
-      .then(res=>res.json())
-      .then(attractions=>this.props.dispatchAllAttractions(attractions))
-    })
+    .then(res=>this.props.getAllAttractions())
   }
 
   handleDeleteAttraction = (event) => {
-    console.log(this.props.currentMarker)
     fetch(`${BASE_URL}/attractions/${this.props.currentMarker.id}`, {
       headers: {
         'Accept': 'application/json',
@@ -54,7 +50,12 @@ class BasicPopup extends Component {
       },
       method: 'DELETE'
     })
-    .then(res=>console.log(res))
+    const currentAttraction = this.props.attractions.find(a=>a.id===this.props.currentMarker.id)
+    const index = this.props.attractions.indexOf(currentAttraction)
+    const newAttractions = this.props.attractions
+    newAttractions.splice(index,1)
+    this.props.deleteAttraction(newAttractions)
+    this.props.basicPopupToggle(false)
   }
 
   render() {
@@ -112,20 +113,10 @@ class BasicPopup extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    attractions: state.attractions,
     isBasicPopupDisplayed: state.isBasicPopupDisplayed,
     currentMarker: state.currentMarker,
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatchAllAttractions: (attractions) => {
-      dispatch({
-        type: 'SET_ALL_ATTRACTIONS',
-        payload: attractions
-      })
-    }
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(BasicPopup);
+export default connect(mapStateToProps,actions)(BasicPopup);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import * as actions from '../actions'
 import '../App.css';
 
 const BASE_URL = 'http://localhost:3000/api/v1';
@@ -105,21 +106,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addLocation: (location) => {
-      dispatch({
-        type: 'ADD_LOCATION',
-        payload: location
-      })
-    },
-    setCurrentTrip: (currentTrip) => {
-      dispatch({
-        type: 'SET_CURRENT_TRIP',
-        payload: currentTrip
-      })
-    },
-  };
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(Search)
+export default connect(mapStateToProps,actions)(Search)

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { connect } from 'react-redux';
-import NewPopup from './NewPopup'
-import BasicPopup from './BasicPopup'
-import '../App.css'
+import NewPopup from './NewPopup';
+import BasicPopup from './BasicPopup';
+import * as actions from '../actions';
+import '../App.css';
 
 const stamenTerrainTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const stamenTerrainAttr = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
@@ -30,7 +31,7 @@ class GeoMap extends Component {
     if(this.props.isNewPopupDisplayed) {
       this.props.newPopupToggle(false)
     } else {
-      this.props.currentAttraction(event)
+      this.props.setCurrentAttraction(event)
       this.props.newPopupToggle(true)
     }
     this.props.basicPopupToggle(false)
@@ -87,33 +88,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    currentAttraction: (event) => {
-      dispatch({
-        type: 'CURRENT_ATTRACTION',
-        payload: { event }
-      })
-    },
-    newPopupToggle: (toggle) => {
-      dispatch({
-        type: 'TOGGLE_NEW_POPUP',
-        payload: toggle
-      })
-    },
-    markerSelected: (marker) => {
-      dispatch({
-        type: 'CURRENT_MARKER',
-        payload: marker
-      })
-    },
-    basicPopupToggle: (toggle) => {
-      dispatch({
-        type: 'TOGGLE_BASIC_POPUP',
-        payload: toggle
-      })
-    },
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(GeoMap);
+export default connect(mapStateToProps,actions)(GeoMap);

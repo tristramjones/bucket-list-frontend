@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
+import * as actions from '../actions'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
 
@@ -16,7 +17,7 @@ class NewPopup extends Component {
     const title = this.state.popupTitle
     const desc = this.state.popupDescription
     const trip_id = this.props.currentTrip.id
-    const position = this.props.currentAttraction.event.latlng
+    const position = this.props.currentAttraction.latlng
 
     fetch(`${BASE_URL}/attractions`, {
       headers: {
@@ -42,7 +43,7 @@ class NewPopup extends Component {
 
   render() {
     return (
-      <Popup position={this.props.currentAttraction.event.latlng}>
+      <Popup position={this.props.currentAttraction.latlng}>
         <div className="popup-container">
           <form onSubmit={this.persistAttraction}>
             <input
@@ -81,24 +82,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addAttraction: (title,desc,trip_id,position,toggle) => {
-      dispatch({
-        type: 'ADD_ATTRACTION',
-        payload: {
-          title: title,
-          description: desc,
-          trip_id: trip_id,
-          position: position
-        }
-      })
-      dispatch({
-        type: 'TOGGLE_NEW_POPUP',
-        payload: toggle
-      })
-    },
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(NewPopup);
+export default connect(mapStateToProps,actions)(NewPopup);
