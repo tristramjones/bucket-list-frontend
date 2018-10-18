@@ -59,6 +59,10 @@
   color: #292C34;
   font-size: 16px;
   font-family: 'Raleway', sans-serif;
+  /* background-image: url('https://atom-minimap.github.io/minimap/image/search.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; */
 }
 
 .search-button:hover {
@@ -79,6 +83,8 @@
 
 .popup-description {
   font-size: 16px;
+  height: 125px;
+  overflow: auto;
 }
 
 .popup-input {
@@ -110,4 +116,19 @@
   color: #42c5f4;
   border: 1px solid #42c5f4;
   border-radius: 1px;
+}
+
+.popup-container > img.edit-icon {
+  width: 20px;
+  position: absolute;
+  left: 200px;
+  top: 190px;
+}
+
+.popup-container > img.delete-icon {
+  width: 25px;
+  height: 22px;
+  position: absolute;
+  left: 15px;
+  top: 189px;
 }

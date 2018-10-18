@@ -23,7 +23,7 @@ class BasicPopup extends Component {
 
   persistChanges = (event) => {
     event.preventDefault();
-
+    console.log(this.props.currentMarker)
     fetch(`${BASE_URL}/attractions/${this.props.currentMarker.id}`, {
       headers: {
         'Accept': 'application/json',
@@ -38,7 +38,23 @@ class BasicPopup extends Component {
       })
     })
     .then(res=>this.setState({ editPopup: false }))
-    // .then(res=>this.props.editAttraction(this.state.popupTitle,this.state.popupDescription,this.props.currentMarker))
+    .then(res=> {
+      return fetch(`${BASE_URL}/attractions`)
+      .then(res=>res.json())
+      .then(attractions=>this.props.dispatchAllAttractions(attractions))
+    })
+  }
+
+  handleDeleteAttraction = (event) => {
+    console.log(this.props.currentMarker)
+    fetch(`${BASE_URL}/attractions/${this.props.currentMarker.id}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'DELETE'
+    })
+    .then(res=>console.log(res))
   }
 
   render() {
@@ -71,9 +87,22 @@ class BasicPopup extends Component {
       :
       <Popup position={JSON.parse(this.props.currentMarker.position)}>
         <div className="popup-container">
-          <h2 className="popup-title">{this.props.currentMarker.title}</h2>
-          <p className="popup-description">{this.props.currentMarker.description}</p>
-          <button className="search-button" onClick={this.handleEditPopup}>Edit</button>
+          <h2 className="popup-title">{this.state.popupTitle}</h2>
+          <div className="popup-description">
+            <p>{this.state.popupDescription}</p>
+          </div>
+          <img
+            className="edit-icon"
+            src="https://www.freeiconspng.com/uploads/edit-editor-pen-pencil-write-icon--4.png"
+            onClick={this.handleEditPopup}
+            alt="edit-icon"
+            />
+          <img
+            className="delete-icon"
+            src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-coloricon-1/21/52-512.png"
+            onClick={this.handleDeleteAttraction}
+            alt="delete-icon"
+            />
         </div>
       </Popup>
     );
@@ -88,15 +117,15 @@ const mapStateToProps = (state) => {
   }
 }
 
-// const mapDispatchToProps = (state) => {
-//   return {
-//     editAttraction: (title,desc,marker) {
-//       dispatch({
-//         type: EDIT_ATTRACTION,
-//         payload:
-//       })
-//     }
-//   }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchAllAttractions: (attractions) => {
+      dispatch({
+        type: 'SET_ALL_ATTRACTIONS',
+        payload: attractions
+      })
+    }
+  }
+}
 
 export default connect(mapStateToProps,mapDispatchToProps)(BasicPopup);
