@@ -75,7 +75,7 @@ class Search extends Component {
   render() {
     return (
       <div className="search-container">
-        <h2>Pick Your Next Adventure</h2>
+        <h3>Plan Your Next Adventure</h3>
         <div>
           <form>
             <input
@@ -87,7 +87,8 @@ class Search extends Component {
             <input
               className="search-button"
               onClick={this.handleSearch}
-              type="Submit">
+              type="submit"
+              value="Search">
             </input>
           </form>
         </div>

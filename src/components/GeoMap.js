@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker } from 'react-leaflet';
 import { connect } from 'react-redux';
-import L from 'leaflet'
-// import { CustomPopup } from './CustomPopup'
+import NewPopup from './NewPopup'
+import BasicPopup from './BasicPopup'
 import '../App.css'
 
-const BASE_URL = 'http://localhost:3000/api/v1';
 const stamenTerrainTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const stamenTerrainAttr = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 const zoomLevel = 12;
@@ -13,10 +12,6 @@ const zoomLevel = 12;
 class GeoMap extends Component {
   state = {
     currentZoomLevel: zoomLevel,
-    popupIsDisplayed: false,
-    currentAttraction: null,
-    popupTitle: '',
-    popupDescription: '',
   };
 
   componentDidMount() {
@@ -31,54 +26,22 @@ class GeoMap extends Component {
     this.setState({ currentZoomLevel: newZoomLevel });
   }
 
-  handleMarkerCreation = (event) => {
-    const leafletMap = this.leafletMap.leafletElement;
-    const lat = event.latlng.lat
-    const lng = event.latlng.lng
-    const marker = L.marker([lat,lng]).addTo(leafletMap)
-    this.setState({
-      popupIsDisplayed: true,
-      currentAttraction: marker
-    })
+  handlePopupToggles = (event) => {
+    if(this.props.isNewPopupDisplayed) {
+      this.props.newPopupToggle(false)
+    } else {
+      this.props.currentAttraction(event)
+      this.props.newPopupToggle(true)
+    }
+    this.props.basicPopupToggle(false)
   }
 
-  persistAttractionToBackend = (event) => {
-    event.preventDefault();
-    fetch(`${BASE_URL}/attractions`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        title: this.state.popupTitle,
-        description: this.state.popupDescription,
-        trip_id: this.props.currentTrip.id,
-        position: JSON.stringify(this.state.currentAttraction._latlng)
-      })
+  handleBasicPopupDisplay = (event) => {
+    const marker = this.props.attractions.find(a=>{
+      return JSON.parse(a.position).lat === event.latlng.lat && JSON.parse(a.position).lng === event.latlng.lng
     })
-    .then(this.setState({
-      popupIsDisplayed: false
-    }))
-  }
-
-  handlePopupDisplay = (event) => {
-    this.setState({
-      popupIsDisplayed: !this.state.popupIsDisplayed,
-      currentAttraction: event.target,
-    })
-  }
-
-  handlePopupTitleChange = (event) => {
-    this.setState({
-      popupTitle: event.target.value
-    })
-  }
-
-  handlePopupDescriptionChange = (event) => {
-    this.setState({
-      popupDescription: event.target.value
-    })
+    this.props.markerSelected(marker)
+    this.props.basicPopupToggle(true)
   }
 
   render() {
@@ -91,45 +54,23 @@ class GeoMap extends Component {
           this.props.locations[this.props.locations.length-1].lon]
         }
         zoom={zoomLevel}
-        onClick={this.handleMarkerCreation}
+        onClick={this.handlePopupToggles}
       >
         <TileLayer
           attribution={stamenTerrainAttr}
           url={stamenTerrainTiles}
         />
-      {
-        this.props.attractions.map(a =>
-          <Marker
-            key={a.id}
-            position={ JSON.parse(a.position) }
-            onClick={ this.handlePopupDisplay }>
-          </Marker>
-        )
-      }
-      {
-        this.state.popupIsDisplayed ?
-        <Popup position={this.state.currentAttraction._latlng}>
-          <div className="popup-container">
-            <form onSubmit={this.persistAttractionToBackend}>
-              <input
-                className="search-input"
-                onChange={this.handlePopupTitleChange}
-                placeholder="Title">
-              </input>
-              <input
-                className="search-input"
-                onChange={this.handlePopupDescriptionChange}
-                placeholder="Description">
-              </input>
-              <input
-                className="search-button"
-                type="Submit">
-              </input>
-            </form>
-          </div>
-        </Popup>
-        : null
-      }
+        {
+          this.props.attractions.map(a =>
+            <Marker
+              key={a.id}
+              position={ JSON.parse(a.position) }
+              onClick={ this.handleBasicPopupDisplay }>
+            </Marker>
+          )
+        }
+        { this.props.isNewPopupDisplayed ? <NewPopup /> : null }
+        { this.props.isBasicPopupDisplayed ? <BasicPopup /> : null }
       </Map>
     );
   }
@@ -138,10 +79,41 @@ class GeoMap extends Component {
 const mapStateToProps = (state) => {
   return {
     locations: state.locations,
-    currentTrip: state.currentTrip,
-    trips: state.trips,
     attractions: state.attractions,
+    currentAttraction: state.currentAttraction,
+    isNewPopupDisplayed: state.isNewPopupDisplayed,
+    isBasicPopupDisplayed: state.isBasicPopupDisplayed,
+    currentMarker: state.currentMarker,
   }
 }
 
-export default connect(mapStateToProps)(GeoMap);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    currentAttraction: (event) => {
+      dispatch({
+        type: 'CURRENT_ATTRACTION',
+        payload: { event }
+      })
+    },
+    newPopupToggle: (toggle) => {
+      dispatch({
+        type: 'TOGGLE_NEW_POPUP',
+        payload: toggle
+      })
+    },
+    markerSelected: (marker) => {
+      dispatch({
+        type: 'CURRENT_MARKER',
+        payload: marker
+      })
+    },
+    basicPopupToggle: (toggle) => {
+      dispatch({
+        type: 'TOGGLE_BASIC_POPUP',
+        payload: toggle
+      })
+    },
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(GeoMap);

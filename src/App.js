@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Menu } from './components/Menu'
+// import { Menu } from './components/Menu'
 import Search from './components/Search'
 import GeoMap from './components/GeoMap'
 import './App.css';
@@ -16,7 +16,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.locations)
     return (
       <div className="app-container">
         <Search />
