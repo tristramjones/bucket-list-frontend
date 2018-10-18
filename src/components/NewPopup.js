@@ -42,8 +42,9 @@ class NewPopup extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
-      <Popup position={this.props.currentAttraction.event.latlng}>
+      <Popup position={this.props.currentAttraction.latlng}>
         <div className="popup-container">
           <form onSubmit={this.persistAttraction}>
             <input

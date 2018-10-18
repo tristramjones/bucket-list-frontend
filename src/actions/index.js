@@ -4,37 +4,41 @@ import {
   SET_ALL_TRIPS,
   SET_ALL_ATTRACTIONS,
   ADD_ATTRACTION,
-  CURRENT_ATTRACTION,
+  SET_CURRENT_ATTRACTION,
   TOGGLE_NEW_POPUP,
   TOGGLE_BASIC_POPUP,
-  CURRENT_MARKER
+  SET_CURRENT_MARKER,
+  DELETE_ATTRACTION,
 } from './types.js'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
 
-
-export const currentAttraction = (event) => (dispatch) => {
-  dispatch({ type: 'CURRENT_ATTRACTION', payload: { event } })
+export const setCurrentAttraction = (event) => (dispatch) => {
+  dispatch({ type: SET_CURRENT_ATTRACTION, payload: event })
 }
 
 export const newPopupToggle = (toggle) => (dispatch) => {
-  dispatch({ type: 'TOGGLE_NEW_POPUP', payload: toggle })
+  dispatch({ type: TOGGLE_NEW_POPUP, payload: toggle })
 }
 
 export const markerSelected = (marker) => (dispatch) => {
-  dispatch({ type: 'CURRENT_MARKER', payload: marker })
+  dispatch({ type: SET_CURRENT_MARKER, payload: marker })
 }
 
 export const basicPopupToggle = (toggle) => (dispatch) => {
-  dispatch({ type: 'TOGGLE_BASIC_POPUP', payload: toggle })
+  dispatch({ type: TOGGLE_BASIC_POPUP, payload: toggle })
 }
 
 export const addLocation = (location) => (dispatch) => {
-  dispatch({ type: 'ADD_LOCATION', payload: location })
+  dispatch({ type: ADD_LOCATION, payload: location })
 }
 
 export const setCurrentTrip = (currentTrip) => (dispatch) => {
-  dispatch({ type: 'SET_CURRENT_TRIP', payload: currentTrip })
+  dispatch({ type: SET_CURRENT_TRIP, payload: currentTrip })
+}
+
+export const deleteAttraction = (attraction, allAttractions) => (dispatch) => {
+  dispatch({ type: DELETE_ATTRACTION, payload: allAttractions })
 }
 
 export const getAllAttractions = () => (dispatch) => {

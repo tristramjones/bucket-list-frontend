@@ -31,7 +31,7 @@ class GeoMap extends Component {
     if(this.props.isNewPopupDisplayed) {
       this.props.newPopupToggle(false)
     } else {
-      this.props.currentAttraction(event)
+      this.props.setCurrentAttraction(event)
       this.props.newPopupToggle(true)
     }
     this.props.basicPopupToggle(false)
@@ -46,8 +46,6 @@ class GeoMap extends Component {
   }
 
   render() {
-    console.log(this.props.currentMarker)
-    console.log(this.props.currentAttraction)
     return (
       <Map
         className="map"
