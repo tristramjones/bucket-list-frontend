@@ -12,6 +12,23 @@ import {
 
 const BASE_URL = 'http://localhost:3000/api/v1';
 
+
+export const currentAttraction = (event) => (dispatch) => {
+  dispatch({ type: 'CURRENT_ATTRACTION', payload: { event } })
+}
+
+export const newPopupToggle = (toggle) => (dispatch) => {
+  dispatch({ type: 'TOGGLE_NEW_POPUP', payload: toggle })
+}
+
+export const markerSelected = (marker) => (dispatch) => {
+  dispatch({ type: 'CURRENT_MARKER', payload: marker })
+}
+
+export const basicPopupToggle = (toggle) => (dispatch) => {
+  dispatch({ type: 'TOGGLE_BASIC_POPUP', payload: toggle })
+}
+
 export const addLocation = (location) => (dispatch) => {
   dispatch({ type: 'ADD_LOCATION', payload: location })
 }
