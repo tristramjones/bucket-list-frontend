@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
+import * as actions from '../actions'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
 
@@ -81,24 +82,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addAttraction: (title,desc,trip_id,position,toggle) => {
-      dispatch({
-        type: 'ADD_ATTRACTION',
-        payload: {
-          title: title,
-          description: desc,
-          trip_id: trip_id,
-          position: position
-        }
-      })
-      dispatch({
-        type: 'TOGGLE_NEW_POPUP',
-        payload: toggle
-      })
-    },
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(NewPopup);
+export default connect(mapStateToProps,actions)(NewPopup);

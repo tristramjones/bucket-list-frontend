@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
+import * as actions from '../actions'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
 
@@ -23,7 +24,7 @@ class BasicPopup extends Component {
 
   persistChanges = (event) => {
     event.preventDefault();
-    console.log(this.props.currentMarker)
+
     fetch(`${BASE_URL}/attractions/${this.props.currentMarker.id}`, {
       headers: {
         'Accept': 'application/json',
@@ -38,11 +39,7 @@ class BasicPopup extends Component {
       })
     })
     .then(res=>this.setState({ editPopup: false }))
-    .then(res=> {
-      return fetch(`${BASE_URL}/attractions`)
-      .then(res=>res.json())
-      .then(attractions=>this.props.dispatchAllAttractions(attractions))
-    })
+    .then(res=>this.props.getAllAttractions())
   }
 
   handleDeleteAttraction = (event) => {
@@ -117,15 +114,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatchAllAttractions: (attractions) => {
-      dispatch({
-        type: 'SET_ALL_ATTRACTIONS',
-        payload: attractions
-      })
-    }
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(BasicPopup);
+export default connect(mapStateToProps,actions)(BasicPopup);

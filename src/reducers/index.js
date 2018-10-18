@@ -29,7 +29,6 @@ const reducer = (state=defaultState, action) => {
     case SET_ALL_TRIPS:
       return { ...state, trips: action.payload }
     case SET_ALL_ATTRACTIONS:
-    // debugger
       return { ...state, attractions: action.payload }
     case ADD_ATTRACTION:
       return { ...state, attractions: [...state.attractions, action.payload] }
