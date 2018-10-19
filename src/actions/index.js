@@ -46,14 +46,15 @@ export const getAllAttractions = () => (dispatch) => {
   .then(attractions=>dispatch({ type: SET_ALL_ATTRACTIONS, payload: attractions }))
 }
 
-export const addAttraction = (title,desc,trip_id,position,toggle) => (dispatch) => {
+export const addAttraction = (attractionObj,toggle) => (dispatch) => {
   dispatch({
     type: ADD_ATTRACTION,
     payload: {
-      title: title,
-      description: desc,
-      trip_id: trip_id,
-      position: position
+      id: attractionObj.id,
+      title: attractionObj.title,
+      description: attractionObj.description,
+      trip_id: attractionObj.trip_id,
+      position: attractionObj.position
     }
   })
   dispatch({ type: 'TOGGLE_NEW_POPUP', payload: toggle })

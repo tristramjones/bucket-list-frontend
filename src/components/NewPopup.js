@@ -32,7 +32,8 @@ class NewPopup extends Component {
         position: JSON.stringify(position)
       })
     })
-    .then(res=>this.props.addAttraction(title,desc,trip_id,JSON.stringify(position),false))
+    .then(res=>res.json())
+    .then(attractionObj=>this.props.addAttraction(attractionObj,false))
   }
 
   handleFormFieldChange = (event) => {
