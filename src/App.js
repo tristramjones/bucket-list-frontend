@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { Menu } from './components/Menu'
-import Search from './components/Search'
-import GeoMap from './components/GeoMap'
+import Search from './components/Search';
+import GeoMap from './components/GeoMap';
+import * as actions from './actions';
 import './App.css';
 
 const BASE_URL = 'http://localhost:3000/api/v1';
@@ -12,7 +12,7 @@ class App extends Component {
   componentWillMount = () => {
     fetch(`${BASE_URL}/attractions`)
     .then(res=>res.json())
-    .then(attractions=>this.props.dispatchAllAttractions(attractions))
+    .then(attractions=>this.props.getAllAttractions(attractions))
   }
 
   render() {
@@ -32,15 +32,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatchAllAttractions: (attractions) => {
-      dispatch({
-        type: 'SET_ALL_ATTRACTIONS',
-        payload: attractions
-      })
-    }
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(App)
+export default connect(mapStateToProps,actions)(App)

@@ -14,8 +14,6 @@ const reducer = (state=defaultState, action) => {
   switch(action.type) {
     case 'SET_CURRENT_TRIP':
       return { ...state, currentTrip: action.payload }
-    case 'SET_ALL_TRIPS':
-      return { ...state, trips: action.payload }
     case 'SET_ALL_ATTRACTIONS':
       return { ...state, attractions: action.payload }
     case 'SET_CURRENT_ATTRACTION':
