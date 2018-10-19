@@ -67,6 +67,7 @@ class NewPopup extends Component {
             <div className="select-div">
               <label>
                 <select onChange={this.handleOptionSelect}>
+                  <option value=""></option>
                   <option value="food">Food</option>
                   <option value="event">Event</option>
                   <option value="adventure">Adventure</option>

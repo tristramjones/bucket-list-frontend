@@ -83,6 +83,7 @@ const mapStateToProps = (state) => {
     attractions: state.attractions,
     isNewPopupDisplayed: state.isNewPopupDisplayed,
     isBasicPopupDisplayed: state.isBasicPopupDisplayed,
+    // currentAttraction: state.currentAttraction
   }
 }
 

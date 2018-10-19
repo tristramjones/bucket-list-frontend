@@ -51,6 +51,7 @@ export const addAttraction = (attractionObj,toggle) => (dispatch) => {
     type: ADD_ATTRACTION,
     payload: {
       id: attractionObj.id,
+      category: attractionObj.category,
       title: attractionObj.title,
       description: attractionObj.description,
       trip_id: attractionObj.trip_id,

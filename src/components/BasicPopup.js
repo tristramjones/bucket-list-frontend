@@ -9,6 +9,7 @@ class BasicPopup extends Component {
   state = {
     popupTitle: this.props.currentAttraction.title,
     popupDescription: this.props.currentAttraction.description,
+    popupCategory: this.props.currentAttraction.category,
     editPopup: false,
   };
 
@@ -17,9 +18,11 @@ class BasicPopup extends Component {
   }
 
   handleFormFieldChange = (event) => {
-    this.setState({
-      [event.target.dataset.label]: event.target.value
-    })
+    this.setState({ [event.target.dataset.label]: event.target.value })
+  }
+
+  handleOptionSelect = (event) => {
+    this.setState({ popupCategory: event.target.value })
   }
 
   persistChanges = (event) => {
@@ -43,8 +46,6 @@ class BasicPopup extends Component {
   }
 
   handleDeleteAttraction = (event) => {
-    console.log('event',event)
-    console.log('attraction',this.props.currentAttraction)
     fetch(`${BASE_URL}/attractions/${this.props.currentAttraction.id}`, {
       headers: {
         'Accept': 'application/json',
@@ -61,7 +62,6 @@ class BasicPopup extends Component {
   }
 
   render() {
-    console.log(this.props.currentAttraction)
     return (
       this.state.editPopup
       ?
@@ -80,6 +80,16 @@ class BasicPopup extends Component {
               onChange={this.handleFormFieldChange}
               value={this.state.popupDescription}>
             </input>
+            <div className="select-div">
+              <label>
+                <select onChange={this.handleOptionSelect}>
+                  <option value=""></option>
+                  <option value="food">Food</option>
+                  <option value="event">Event</option>
+                  <option value="adventure">Adventure</option>
+                </select>
+              </label>
+            </div>
             <input
               className="popup-button"
               type="submit"
@@ -92,6 +102,7 @@ class BasicPopup extends Component {
       <Popup position={JSON.parse(this.props.currentAttraction.position)}>
         <div className="popup-container">
           <h2 className="popup-title">{this.state.popupTitle}</h2>
+          <p className="popup-category">{this.state.popupCategory}</p>
           <div className="popup-description">
             <p>{this.state.popupDescription}</p>
           </div>
