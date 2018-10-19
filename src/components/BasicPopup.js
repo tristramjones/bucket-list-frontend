@@ -7,8 +7,8 @@ const BASE_URL = 'http://localhost:3000/api/v1';
 
 class BasicPopup extends Component {
   state = {
-    popupTitle: this.props.currentMarker.title,
-    popupDescription: this.props.currentMarker.description,
+    popupTitle: this.props.currentAttraction.title,
+    popupDescription: this.props.currentAttraction.description,
     editPopup: false,
   };
 
@@ -25,7 +25,7 @@ class BasicPopup extends Component {
   persistChanges = (event) => {
     event.preventDefault();
 
-    fetch(`${BASE_URL}/attractions/${this.props.currentMarker.id}`, {
+    fetch(`${BASE_URL}/attractions/${this.props.currentAttraction.id}`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -34,8 +34,8 @@ class BasicPopup extends Component {
       body: JSON.stringify({
         title: this.state.popupTitle,
         description: this.state.popupDescription,
-        trip_id: this.props.currentMarker.trip_id,
-        position: this.props.currentMarker.position
+        trip_id: this.props.currentAttraction.trip_id,
+        position: this.props.currentAttraction.position
       })
     })
     .then(res=>this.setState({ editPopup: false }))
@@ -43,14 +43,14 @@ class BasicPopup extends Component {
   }
 
   handleDeleteAttraction = (event) => {
-    fetch(`${BASE_URL}/attractions/${this.props.currentMarker.id}`, {
+    fetch(`${BASE_URL}/attractions/${this.props.currentAttraction.id}`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       method: 'DELETE'
     })
-    const currentAttraction = this.props.attractions.find(a=>a.id===this.props.currentMarker.id)
+    const currentAttraction = this.props.attractions.find(a=>a.id===this.props.currentAttraction.id)
     const index = this.props.attractions.indexOf(currentAttraction)
     const newAttractions = this.props.attractions
     newAttractions.splice(index,1)
@@ -62,7 +62,7 @@ class BasicPopup extends Component {
     return (
       this.state.editPopup
       ?
-      <Popup position={JSON.parse(this.props.currentMarker.position)}>
+      <Popup position={JSON.parse(this.props.currentAttraction.position)}>
         <div className="popup-container">
           <form onSubmit={this.persistChanges}>
             <input
@@ -86,7 +86,7 @@ class BasicPopup extends Component {
         </div>
       </Popup>
       :
-      <Popup position={JSON.parse(this.props.currentMarker.position)}>
+      <Popup position={JSON.parse(this.props.currentAttraction.position)}>
         <div className="popup-container">
           <h2 className="popup-title">{this.state.popupTitle}</h2>
           <div className="popup-description">
@@ -115,7 +115,7 @@ const mapStateToProps = (state) => {
   return {
     attractions: state.attractions,
     isBasicPopupDisplayed: state.isBasicPopupDisplayed,
-    currentMarker: state.currentMarker,
+    currentAttraction: state.currentAttraction,
   }
 }
 

@@ -17,7 +17,7 @@ class NewPopup extends Component {
     const title = this.state.popupTitle
     const desc = this.state.popupDescription
     const trip_id = this.props.currentTrip.id
-    const position = this.props.currentAttraction.latlng
+    const position = this.props.newMarker.latlng
 
     fetch(`${BASE_URL}/attractions`, {
       headers: {
@@ -43,7 +43,7 @@ class NewPopup extends Component {
 
   render() {
     return (
-      <Popup position={this.props.currentAttraction.latlng}>
+      <Popup position={this.props.newMarker.latlng}>
         <div className="popup-container">
           <form onSubmit={this.persistAttraction}>
             <input
@@ -77,7 +77,7 @@ const mapStateToProps = (state) => {
     currentTrip: state.currentTrip,
     trips: state.trips,
     attractions: state.attractions,
-    currentAttraction: state.currentAttraction,
+    newMarker: state.newMarker,
     isNewPopupDisplayed: state.isNewPopupDisplayed,
   }
 }
