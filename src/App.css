@@ -108,11 +108,21 @@
   height: 200px;
 }
 
+.leaflet-popup-content p {
+  margin: 0;
+}
+
 .popup-title {
   font-size: 28px;
 }
 
+.popup-category {
+  font-size: 14px;
+  font-style: italic;
+}
+
 .popup-description {
+  margin-top: 13px;
   font-size: 16px;
   height: 125px;
   overflow: auto;

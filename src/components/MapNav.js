@@ -9,10 +9,10 @@ class MapNav extends Component {
   render() {
     return (
       <div className="map-nav-container" role="group">
-        <button className="map-nav-button">Show All</button>
-        <button className="map-nav-button">My Food</button>
-        <button className="map-nav-button">My Hikes</button>
-        <button className="map-nav-button">My Sites</button>
+        <button className="map-nav-button" onClick={this.props.removeFilters}>Show All</button>
+        <button className="map-nav-button" onClick={()=>this.props.applyFoodFilter(this.props.attractions)}>Food</button>
+        <button className="map-nav-button" onClick={()=>this.props.applyEventFilter(this.props.attractions)}>Events</button>
+        <button className="map-nav-button" onClick={()=>this.props.applyAdventureFilter(this.props.attractions)}>Adventures</button>
       </div>
     );
   }
@@ -22,6 +22,7 @@ class MapNav extends Component {
 const mapStateToProps = (state) => {
   return {
     currentTrip: state.currentTrip,
+    attractions: state.attractions,
     newMarker: state.newMarker,
   }
 }

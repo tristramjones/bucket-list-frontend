@@ -8,6 +8,10 @@ import {
   TOGGLE_BASIC_POPUP,
   SET_CURRENT_ATTRACTION,
   DELETE_ATTRACTION,
+  FILTER_FOOD,
+  FILTER_EVENTS,
+  FILTER_ADVENTURES,
+  RESET_FILTER,
 } from './types.js'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
@@ -38,6 +42,22 @@ export const setCurrentTrip = (currentTrip) => (dispatch) => {
 
 export const deleteAttraction = (attractions) => (dispatch) => {
   dispatch({ type: DELETE_ATTRACTION, payload: attractions })
+}
+
+export const applyEventFilter = (attractions) => (dispatch) => {
+  dispatch({ type: FILTER_EVENTS, payload: attractions.filter(a=>a.category==='Event') })
+}
+
+export const applyFoodFilter = (attractions) => (dispatch) => {
+  dispatch({ type: FILTER_FOOD, payload: attractions.filter(a=>a.category==='Food') })
+}
+
+export const applyAdventureFilter = (attractions) => (dispatch) => {
+  dispatch({ type: FILTER_ADVENTURES, payload: attractions.filter(a=>a.category==='Adventure') })
+}
+
+export const removeFilters = () => (dispatch) => {
+  dispatch({ type: RESET_FILTER, payload: [] })
 }
 
 export const getAllAttractions = () => (dispatch) => {

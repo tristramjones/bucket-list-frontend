@@ -62,6 +62,7 @@ class BasicPopup extends Component {
   }
 
   render() {
+    console.log(this.props.currentAttraction)
     return (
       this.state.editPopup
       ?
@@ -84,9 +85,9 @@ class BasicPopup extends Component {
               <label>
                 <select onChange={this.handleOptionSelect}>
                   <option value=""></option>
-                  <option value="food">Food</option>
-                  <option value="event">Event</option>
-                  <option value="adventure">Adventure</option>
+                  <option value="Food">Food</option>
+                  <option value="Event">Event</option>
+                  <option value="Adventure">Adventure</option>
                 </select>
               </label>
             </div>
