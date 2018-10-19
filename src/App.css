@@ -2,19 +2,6 @@
   box-sizing: border-box;
 }
 
-.leaflet-container {
-  margin: 0 auto;
-  height: 400px;
-  width: 67%;
-  border: 1px solid #ccc;
-  border-radius: 1px;
-}
-
-#mapid {
-  height: 100%;
-  width: 100%;
-}
-
 .header {
   background-color: #292C34;
   height: 50px;
@@ -44,7 +31,8 @@
   margin: 20px 20px 0 0;
   border: 1px solid #ccc;
   border-radius: 1px;
-  text-align: center;
+  text-align: left;
+  padding: 0 10px;
   font-size: 16px;
   font-family: 'Raleway', sans-serif;
 }
@@ -72,6 +60,49 @@
   border-radius: 1px;
 }
 
+.map-nav-container {
+  margin: 0 auto;
+  height: 40px;
+  width: 67%;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  border-radius: 1px;
+  background-color: white;
+  display: flex;
+}
+
+.map-nav-button {
+  width: calc(100%/3);
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+	cursor: pointer;
+	display: block;
+	position: relative;
+  border: none;
+  background-color:
+}
+
+.map-nav-button:hover {
+	background-color: transparent;
+	text-shadow: none;
+}
+
+.leaflet-container {
+  margin: 0 auto;
+  height: 400px;
+  width: 67%;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-radius: 1px;
+}
+
+#mapid {
+  height: 100%;
+  width: 100%;
+}
+
 .popup-container {
   width: 200px;
   height: 200px;
@@ -89,19 +120,33 @@
 
 .popup-input {
   width: 200px;
-  height: 40px;
+  height: 30px;
   margin: 10px auto;
   border: 1px solid #ccc;
   border-radius: 1px;
-  text-align: center;
+  padding: 0 10px;
+  text-align: left;
   font-size: 16px;
   font-family: 'Raleway', sans-serif;
+}
+
+.select-div select {
+  width: 200px;
+  height: 30px;
+  margin: 10px auto;
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  background-color: white;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+  -webkit-appearance: none;
+  -webkit-border-radius: 1px;
 }
 
 .popup-button {
   width: 200px;
   height: 40px;
-  margin: 20px 0 20px 0;
+  margin: 10px 0 20px 0;
   border: none;
   border-radius: 1px;
   background-color: #42c5f4;

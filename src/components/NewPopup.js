@@ -9,12 +9,14 @@ class NewPopup extends Component {
   state = {
     popupTitle: '',
     popupDescription: '',
+    popupCategory: '',
   };
 
   persistAttraction = (event) => {
     event.preventDefault();
 
     const title = this.state.popupTitle
+    const category = this.state.popupCategory
     const desc = this.state.popupDescription
     const trip_id = this.props.currentTrip.id
     const position = this.props.newMarker.latlng
@@ -27,6 +29,7 @@ class NewPopup extends Component {
       method: 'POST',
       body: JSON.stringify({
         title: title,
+        category: category,
         description: desc,
         trip_id: trip_id,
         position: JSON.stringify(position)
@@ -59,6 +62,15 @@ class NewPopup extends Component {
               onChange={this.handleFormFieldChange}
               placeholder="Description">
             </input>
+            <div className="select-div">
+              <label>
+                <select>
+                  <option value="food">Food</option>
+                  <option value="event">Event</option>
+                  <option value="adventure">Adventure</option>
+                </select>
+              </label>
+            </div>
             <input
               className="popup-button"
               type="submit"
