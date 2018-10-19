@@ -43,6 +43,8 @@ class BasicPopup extends Component {
   }
 
   handleDeleteAttraction = (event) => {
+    console.log('event',event)
+    console.log('attraction',this.props.currentAttraction)
     fetch(`${BASE_URL}/attractions/${this.props.currentAttraction.id}`, {
       headers: {
         'Accept': 'application/json',
@@ -50,8 +52,8 @@ class BasicPopup extends Component {
       },
       method: 'DELETE'
     })
-    const currentAttraction = this.props.attractions.find(a=>a.id===this.props.currentAttraction.id)
-    const index = this.props.attractions.indexOf(currentAttraction)
+    const attToDelete = this.props.attractions.find(a=>a.id===this.props.currentAttraction.id)
+    const index = this.props.attractions.indexOf(attToDelete)
     const newAttractions = this.props.attractions
     newAttractions.splice(index,1)
     this.props.deleteAttraction(newAttractions)
@@ -59,6 +61,7 @@ class BasicPopup extends Component {
   }
 
   render() {
+    console.log(this.props.currentAttraction)
     return (
       this.state.editPopup
       ?
