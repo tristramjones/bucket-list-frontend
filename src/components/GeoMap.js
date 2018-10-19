@@ -31,17 +31,17 @@ class GeoMap extends Component {
     if(this.props.isNewPopupDisplayed) {
       this.props.newPopupToggle(false)
     } else {
-      this.props.setCurrentAttraction(event)
+      this.props.setNewMarker(event)
       this.props.newPopupToggle(true)
     }
     this.props.basicPopupToggle(false)
   }
 
   handleBasicPopupDisplay = (event) => {
-    const marker = this.props.attractions.find(a=>{
+    const attraction = this.props.attractions.find(a=>{
       return JSON.parse(a.position).lat === event.latlng.lat && JSON.parse(a.position).lng === event.latlng.lng
     })
-    this.props.markerSelected(marker)
+    this.props.attractionSelected(attraction)
     this.props.basicPopupToggle(true)
   }
 
@@ -80,11 +80,11 @@ class GeoMap extends Component {
 const mapStateToProps = (state) => {
   return {
     locations: state.locations,
+    newMarker: state.newMarker,
     attractions: state.attractions,
     currentAttraction: state.currentAttraction,
     isNewPopupDisplayed: state.isNewPopupDisplayed,
     isBasicPopupDisplayed: state.isBasicPopupDisplayed,
-    currentMarker: state.currentMarker,
   }
 }
 

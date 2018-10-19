@@ -1,28 +1,27 @@
 import {
   ADD_LOCATION,
   SET_CURRENT_TRIP,
-  SET_ALL_TRIPS,
   SET_ALL_ATTRACTIONS,
   ADD_ATTRACTION,
-  SET_CURRENT_ATTRACTION,
+  NEW_MARKER,
   TOGGLE_NEW_POPUP,
   TOGGLE_BASIC_POPUP,
-  SET_CURRENT_MARKER,
+  SET_CURRENT_ATTRACTION,
   DELETE_ATTRACTION,
 } from './types.js'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
 
-export const setCurrentAttraction = (event) => (dispatch) => {
-  dispatch({ type: SET_CURRENT_ATTRACTION, payload: event })
+export const setNewMarker = (event) => (dispatch) => {
+  dispatch({ type: NEW_MARKER, payload: event })
 }
 
 export const newPopupToggle = (toggle) => (dispatch) => {
   dispatch({ type: TOGGLE_NEW_POPUP, payload: toggle })
 }
 
-export const markerSelected = (marker) => (dispatch) => {
-  dispatch({ type: SET_CURRENT_MARKER, payload: marker })
+export const attractionSelected = (attraction) => (dispatch) => {
+  dispatch({ type: SET_CURRENT_ATTRACTION, payload: attraction })
 }
 
 export const basicPopupToggle = (toggle) => (dispatch) => {
