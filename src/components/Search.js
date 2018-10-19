@@ -89,7 +89,7 @@ class Search extends Component {
               className="search-button"
               onClick={this.handleSearch}
               type="submit"
-              value="Search">
+              value=" ">
             </input>
           </form>
         </div>

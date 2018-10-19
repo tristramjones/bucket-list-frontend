@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
-import * as actions from '../actions'
+import * as actions from '../actions';
 
 const BASE_URL = 'http://localhost:3000/api/v1';
 
@@ -109,13 +109,13 @@ class BasicPopup extends Component {
           </div>
           <img
             className="edit-icon"
-            src="https://www.freeiconspng.com/uploads/edit-editor-pen-pencil-write-icon--4.png"
+            src={process.env.PUBLIC_URL + '/edit-icon.png'}
             onClick={this.handleEditPopup}
             alt="edit-icon"
             />
           <img
             className="delete-icon"
-            src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-coloricon-1/21/52-512.png"
+            src={process.env.PUBLIC_URL + '/delete-icon.png'}
             onClick={this.handleDeleteAttraction}
             alt="delete-icon"
             />
