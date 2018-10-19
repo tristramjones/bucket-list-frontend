@@ -80,9 +80,7 @@ class GeoMap extends Component {
 const mapStateToProps = (state) => {
   return {
     locations: state.locations,
-    newMarker: state.newMarker,
     attractions: state.attractions,
-    currentAttraction: state.currentAttraction,
     isNewPopupDisplayed: state.isNewPopupDisplayed,
     isBasicPopupDisplayed: state.isBasicPopupDisplayed,
   }

@@ -73,12 +73,8 @@ class NewPopup extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    locations: state.locations,
     currentTrip: state.currentTrip,
-    trips: state.trips,
-    attractions: state.attractions,
     newMarker: state.newMarker,
-    isNewPopupDisplayed: state.isNewPopupDisplayed,
   }
 }
 

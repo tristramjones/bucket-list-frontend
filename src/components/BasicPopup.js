@@ -114,7 +114,6 @@ class BasicPopup extends Component {
 const mapStateToProps = (state) => {
   return {
     attractions: state.attractions,
-    isBasicPopupDisplayed: state.isBasicPopupDisplayed,
     currentAttraction: state.currentAttraction,
   }
 }

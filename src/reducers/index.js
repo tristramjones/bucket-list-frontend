@@ -1,6 +1,5 @@
 
 const defaultState = {
-  trips: [],
   locations: [],
   attractions: [],
   currentTrip: null,
