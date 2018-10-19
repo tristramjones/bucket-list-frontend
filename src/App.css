@@ -139,8 +139,8 @@
   background-color: white;
   font-size: 16px;
   font-family: 'Raleway', sans-serif;
-  -webkit-appearance: none;
-  -webkit-border-radius: 1px;
+  /* -webkit-appearance: none;
+  -webkit-border-radius: 1px; */
 }
 
 .popup-button {

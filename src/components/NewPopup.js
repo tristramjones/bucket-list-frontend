@@ -40,9 +40,11 @@ class NewPopup extends Component {
   }
 
   handleFormFieldChange = (event) => {
-    this.setState({
-      [event.target.dataset.label]: event.target.value
-    })
+    this.setState({ [event.target.dataset.label]: event.target.value })
+  }
+
+  handleOptionSelect = (event) => {
+    this.setState({ popupCategory: event.target.value })
   }
 
   render() {
@@ -64,7 +66,7 @@ class NewPopup extends Component {
             </input>
             <div className="select-div">
               <label>
-                <select>
+                <select onChange={this.handleOptionSelect}>
                   <option value="food">Food</option>
                   <option value="event">Event</option>
                   <option value="adventure">Adventure</option>
