@@ -9,12 +9,14 @@ class NewPopup extends Component {
   state = {
     popupTitle: '',
     popupDescription: '',
+    popupCategory: '',
   };
 
   persistAttraction = (event) => {
     event.preventDefault();
 
     const title = this.state.popupTitle
+    const category = this.state.popupCategory
     const desc = this.state.popupDescription
     const trip_id = this.props.currentTrip.id
     const position = this.props.newMarker.latlng
@@ -27,6 +29,7 @@ class NewPopup extends Component {
       method: 'POST',
       body: JSON.stringify({
         title: title,
+        category: category,
         description: desc,
         trip_id: trip_id,
         position: JSON.stringify(position)
@@ -37,9 +40,11 @@ class NewPopup extends Component {
   }
 
   handleFormFieldChange = (event) => {
-    this.setState({
-      [event.target.dataset.label]: event.target.value
-    })
+    this.setState({ [event.target.dataset.label]: event.target.value })
+  }
+
+  handleOptionSelect = (event) => {
+    this.setState({ popupCategory: event.target.value })
   }
 
   render() {
@@ -59,6 +64,16 @@ class NewPopup extends Component {
               onChange={this.handleFormFieldChange}
               placeholder="Description">
             </input>
+            <div className="select-div">
+              <label>
+                <select onChange={this.handleOptionSelect}>
+                  <option value=""></option>
+                  <option value="Food">Food</option>
+                  <option value="Event">Event</option>
+                  <option value="Adventure">Adventure</option>
+                </select>
+              </label>
+            </div>
             <input
               className="popup-button"
               type="submit"

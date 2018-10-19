@@ -62,6 +62,16 @@ class GeoMap extends Component {
           url={stamenTerrainTiles}
         />
         {
+          this.props.filteredAttractions.length > 0
+          ?
+          this.props.filteredAttractions.map(a =>
+            <Marker
+              key={a.id}
+              position={ JSON.parse(a.position) }
+              onClick={ this.handleBasicPopupDisplay }>
+            </Marker>
+          )
+          :
           this.props.attractions.map(a =>
             <Marker
               key={a.id}
@@ -83,6 +93,7 @@ const mapStateToProps = (state) => {
     attractions: state.attractions,
     isNewPopupDisplayed: state.isNewPopupDisplayed,
     isBasicPopupDisplayed: state.isBasicPopupDisplayed,
+    filteredAttractions: state.filteredAttractions
   }
 }
 

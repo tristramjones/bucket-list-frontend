@@ -2,6 +2,7 @@
 const defaultState = {
   locations: [],
   attractions: [],
+  filteredAttractions: [],
   currentTrip: null,
   newMarker: null,
   currentAttraction: null,
@@ -29,6 +30,14 @@ const reducer = (state=defaultState, action) => {
       return { ...state, isNewPopupDisplayed: action.payload }
     case 'TOGGLE_BASIC_POPUP':
       return { ...state, isBasicPopupDisplayed: action.payload }
+    case 'FILTER_FOOD':
+      return { ...state, filteredAttractions: action.payload }
+    case 'FILTER_EVENTS':
+      return { ...state, filteredAttractions: action.payload }
+    case 'FILTER_ADVENTURES':
+      return { ...state, filteredAttractions: action.payload }
+    case 'RESET_FILTER':
+      return { ...state, filteredAttractions: [] }
     default:
       return state
   }
