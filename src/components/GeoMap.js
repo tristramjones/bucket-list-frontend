@@ -6,7 +6,7 @@ import BasicPopup from './BasicPopup';
 import * as actions from '../actions';
 import '../App.css';
 
-const stamenTerrainTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+const stamenTerrainTiles = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png';
 const stamenTerrainAttr = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 const zoomLevel = 12;
 
@@ -56,13 +56,13 @@ class GeoMap extends Component {
     return (
       <Map
         className="map"
-        ref={m => this.leafletMap = m }
+        ref={ m => this.leafletMap = m }
         center={
           [this.props.locations[this.props.locations.length-1].lat,
           this.props.locations[this.props.locations.length-1].lon]
         }
         zoom={zoomLevel}
-        onClick={this.handlePopupTogglesOnMapClicks}
+        onClick={ this.handlePopupTogglesOnMapClicks }
       >
         <TileLayer
           attribution={stamenTerrainAttr}
@@ -81,7 +81,7 @@ class GeoMap extends Component {
           :
           this.props.attractions.map(a =>
             <Marker
-              key={a.id}
+              key={ a.id }
               position={ JSON.parse(a.position) }
               onClick={ this.handlePopupTogglesOnMarkerClicks }>
             </Marker>
