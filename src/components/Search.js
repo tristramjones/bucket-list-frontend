@@ -7,7 +7,8 @@ const BASE_URL = 'http://localhost:3000/api/v1';
 
 class Search extends Component {
   state = {
-    input: ''
+    input: '',
+    errorMessage: false,
   };
 
   handleInput = (event) => {
@@ -18,9 +19,16 @@ class Search extends Component {
     event.preventDefault();
     const query = this.state.input.split(' ').join('%20').toLowerCase();
     fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&city=' + query)
-    .then(r=>r.json())
-    .then(locations=>this.props.addLocation(locations[0]))
-    .then(action=>this.persistLocationToBackend(this.props.locations[this.props.locations.length-1]))
+    .then(res=>res.json())
+    .then(locations=> {
+      if(locations.length > 0) {
+        this.props.addLocation(locations[0])
+        this.persistLocationToBackend(locations[0])
+        this.setState({ errorMessage: false })
+      } else {
+        this.setState({ errorMessage: true })
+      }
+    })
   }
 
   persistLocationToBackend = (location_obj) => {
@@ -35,17 +43,8 @@ class Search extends Component {
         location_json: JSON.stringify(location_obj)
       })
     })
-    .then(r=>this.fetchIdOfLocation(location_obj))
-  }
-
-  fetchIdOfLocation = (location_obj) => {
-    let currentLocation;
-    fetch(`${BASE_URL}/locations`)
     .then(res=>res.json())
-    .then(locations=> {
-      currentLocation = locations.find(l=>JSON.parse(l.location_json).place_id === location_obj.place_id)
-    })
-    .then(r=>this.persistTripToBackend(currentLocation))
+    .then(location_obj=>this.persistTripToBackend(location_obj))
   }
 
   persistTripToBackend = (currentLocation) => {
@@ -60,23 +59,15 @@ class Search extends Component {
         location_id: currentLocation.id
       })
     })
-    .then(r=>this.dispatchCurrentTrip(currentLocation))
-  }
-
-  dispatchCurrentTrip = (currentLocation) => {
-    let currentTrip;
-    fetch(`${BASE_URL}/trips`)
     .then(res=>res.json())
-    .then(trips=> {
-      currentTrip = trips.find(t=>t.location_id === currentLocation.id)
-    })
-    .then(r=>(this.props.setCurrentTrip(currentTrip)))
+    .then(trip=>this.props.setCurrentTrip(trip))
   }
 
   render() {
     return (
       <div className="search-container">
         <h3>Plan Your Next Adventure</h3>
+        { this.state.errorMessage ? <h5 className="invalid-city">Please enter a valid city name</h5> : null }
         <div>
           <form>
             <input
