@@ -4,11 +4,14 @@ import { connect } from 'react-redux';
 import NewPopup from './NewPopup';
 import BasicPopup from './BasicPopup';
 import * as actions from '../actions';
+import L from 'leaflet';
 import '../App.css';
 
-const stamenTerrainTiles = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png';
-const stamenTerrainAttr = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+const openMapTiles = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png';
 const zoomLevel = 12;
+const foodIcon = L.icon({ iconUrl: require('./food.png'), iconSize: [28, 30], iconAnchor: [15, 30],})
+const eventsIcon = L.icon({ iconUrl: require('./events.png'), iconSize: [28, 30], iconAnchor: [15, 30],})
+const adventuresIcon = L.icon({ iconUrl: require('./adventures.png'), iconSize: [28, 30], iconAnchor: [15, 30],})
 
 class GeoMap extends Component {
   state = {
@@ -65,8 +68,7 @@ class GeoMap extends Component {
         onClick={ this.handlePopupTogglesOnMapClicks }
       >
         <TileLayer
-          attribution={stamenTerrainAttr}
-          url={stamenTerrainTiles}
+          url={openMapTiles}
         />
         {
           this.props.filteredAttractions.length > 0
@@ -75,7 +77,8 @@ class GeoMap extends Component {
             <Marker
               key={a.id}
               position={ JSON.parse(a.position) }
-              onClick={ this.handlePopupTogglesOnMarkerClicks }>
+              onClick={ this.handlePopupTogglesOnMarkerClicks }
+              icon={ a.category === 'Food' ? foodIcon : a.category === 'Event' ? eventsIcon : adventuresIcon}>
             </Marker>
           )
           :
@@ -83,7 +86,8 @@ class GeoMap extends Component {
             <Marker
               key={ a.id }
               position={ JSON.parse(a.position) }
-              onClick={ this.handlePopupTogglesOnMarkerClicks }>
+              onClick={ this.handlePopupTogglesOnMarkerClicks }
+              icon={ a.category === 'Food' ? foodIcon : a.category === 'Event' ? eventsIcon : adventuresIcon}>
             </Marker>
           )
         }

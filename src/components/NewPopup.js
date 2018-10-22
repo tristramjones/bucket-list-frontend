@@ -14,7 +14,7 @@ class NewPopup extends Component {
 
   persistAttraction = (event) => {
     event.preventDefault();
-
+    
     const title = this.state.popupTitle
     const category = this.state.popupCategory
     const desc = this.state.popupDescription

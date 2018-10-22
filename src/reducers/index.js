@@ -22,8 +22,6 @@ const reducer = (state=defaultState, action) => {
       return { ...state, newMarker: action.payload }
     case 'ADD_LOCATION':
       return { ...state, locations: [...state.locations, action.payload] }
-    case 'ADD_ATTRACTION':
-      return { ...state, attractions: [...state.attractions, action.payload] }
     case 'DELETE_ATTRACTION':
       return { ...state, attractions: action.payload }
     case 'TOGGLE_NEW_POPUP':
@@ -38,6 +36,12 @@ const reducer = (state=defaultState, action) => {
       return { ...state, filteredAttractions: action.payload }
     case 'RESET_FILTER':
       return { ...state, filteredAttractions: [] }
+    case 'ADD_ATTRACTION':
+      if(state.filteredAttractions.length > 0) {
+        return { ...state, attractions: [...state.attractions, action.payload], filteredAttractions: [...state.filteredAttractions, action.payload] }
+      } else {
+        return { ...state, attractions: [...state.attractions, action.payload] }
+      }
     default:
       return state
   }
