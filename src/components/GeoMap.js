@@ -6,8 +6,7 @@ import BasicPopup from './BasicPopup';
 import * as actions from '../actions';
 import '../App.css';
 
-const stamenTerrainTiles = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png';
-const stamenTerrainAttr = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+const openMapTiles = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png';
 const zoomLevel = 12;
 
 class GeoMap extends Component {
@@ -65,8 +64,7 @@ class GeoMap extends Component {
         onClick={ this.handlePopupTogglesOnMapClicks }
       >
         <TileLayer
-          attribution={stamenTerrainAttr}
-          url={stamenTerrainTiles}
+          url={openMapTiles}
         />
         {
           this.props.filteredAttractions.length > 0
