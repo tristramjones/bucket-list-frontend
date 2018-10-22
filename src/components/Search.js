@@ -44,10 +44,12 @@ class Search extends Component {
       })
     })
     .then(res=>res.json())
+    // .then(console.log)
     .then(location_obj=>this.persistTripToBackend(location_obj))
   }
 
   persistTripToBackend = (currentLocation) => {
+    // debugger
     fetch(`${BASE_URL}/trips`, {
       headers: {
         'Accept': 'application/json',
