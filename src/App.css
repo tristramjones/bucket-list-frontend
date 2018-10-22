@@ -66,6 +66,13 @@
   border-width: 1px 1px 1px 0;
 }
 
+.invalid-city {
+  font-style: italic;
+  color: red;
+  font-weight: normal;
+  margin-top: 10px;
+}
+
 .map-nav-container {
   margin: 0 auto;
   height: 40px;
