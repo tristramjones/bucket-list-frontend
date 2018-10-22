@@ -27,17 +27,24 @@ class GeoMap extends Component {
     this.setState({ currentZoomLevel: newZoomLevel });
   }
 
-  handlePopupToggles = (event) => {
+  handlePopupTogglesOnMapClicks = (event) => {
     if(this.props.isNewPopupDisplayed) {
       this.props.newPopupToggle(false)
     } else {
       this.props.setNewMarker(event)
       this.props.newPopupToggle(true)
     }
-    this.props.basicPopupToggle(false)
+
+    if(this.props.isBasicPopupDisplayed) {
+      this.props.basicPopupToggle(false)
+      this.props.newPopupToggle(false)
+    }
   }
 
-  handleBasicPopupDisplay = (event) => {
+  handlePopupTogglesOnMarkerClicks = (event) => {
+    if(this.props.basicPopupToggle) {
+      this.props.basicPopupToggle(false)
+    }
     const attraction = this.props.attractions.find(a=>{
       return JSON.parse(a.position).lat === event.latlng.lat && JSON.parse(a.position).lng === event.latlng.lng
     })
@@ -49,13 +56,13 @@ class GeoMap extends Component {
     return (
       <Map
         className="map"
-        ref={m => { this.leafletMap = m; } }
+        ref={m => this.leafletMap = m }
         center={
           [this.props.locations[this.props.locations.length-1].lat,
           this.props.locations[this.props.locations.length-1].lon]
         }
         zoom={zoomLevel}
-        onClick={this.handlePopupToggles}
+        onClick={this.handlePopupTogglesOnMapClicks}
       >
         <TileLayer
           attribution={stamenTerrainAttr}
@@ -68,7 +75,7 @@ class GeoMap extends Component {
             <Marker
               key={a.id}
               position={ JSON.parse(a.position) }
-              onClick={ this.handleBasicPopupDisplay }>
+              onClick={ this.handlePopupTogglesOnMarkerClicks }>
             </Marker>
           )
           :
@@ -76,7 +83,7 @@ class GeoMap extends Component {
             <Marker
               key={a.id}
               position={ JSON.parse(a.position) }
-              onClick={ this.handleBasicPopupDisplay }>
+              onClick={ this.handlePopupTogglesOnMarkerClicks }>
             </Marker>
           )
         }
