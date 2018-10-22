@@ -36,6 +36,7 @@ class BasicPopup extends Component {
       method: 'PATCH',
       body: JSON.stringify({
         title: this.state.popupTitle,
+        category: this.state.popupCategory,
         description: this.state.popupDescription,
         trip_id: this.props.currentAttraction.trip_id,
         position: this.props.currentAttraction.position
@@ -62,7 +63,6 @@ class BasicPopup extends Component {
   }
 
   render() {
-    console.log(this.props.currentAttraction)
     return (
       this.state.editPopup
       ?

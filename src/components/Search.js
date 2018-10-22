@@ -35,18 +35,21 @@ class Search extends Component {
         location_json: JSON.stringify(location_obj)
       })
     })
-    .then(r=>this.fetchIdOfLocation(location_obj))
+    .then(res=>res.json())
+    .then(location_obj=>this.persistTripToBackend(location_obj))
+    // .then(r=>this.fetchIdOfLocation(location_obj))
   }
 
-  fetchIdOfLocation = (location_obj) => {
-    let currentLocation;
-    fetch(`${BASE_URL}/locations`)
-    .then(res=>res.json())
-    .then(locations=> {
-      currentLocation = locations.find(l=>JSON.parse(l.location_json).place_id === location_obj.place_id)
-    })
-    .then(r=>this.persistTripToBackend(currentLocation))
-  }
+  // fetchIdOfLocation = (location_obj) => {
+  //   let currentLocation;
+  //   fetch(`${BASE_URL}/locations`)
+  //   .then(res=>res.json())
+  //   .then(locations=> {
+  //     currentLocation = locations.find(l=>JSON.parse(l.location_json).place_id === location_obj.place_id)
+  //   })
+  //   .then(r=>console.log(currentLocation))
+  //   .then(r=>this.persistTripToBackend(currentLocation))
+  // }
 
   persistTripToBackend = (currentLocation) => {
     fetch(`${BASE_URL}/trips`, {
