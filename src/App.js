@@ -13,9 +13,8 @@ class App extends Component {
   componentWillMount = () => {
     fetch(`${BASE_URL}/attractions`)
     .then(res=>res.json())
+    // .then(console.log)
     .then(attractions=>this.props.getAllAttractions(attractions))
-
-    this.props.setCurrentUser(JSON.parse(localStorage.currentUser))
   }
 
   render() {

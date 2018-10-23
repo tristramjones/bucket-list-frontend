@@ -8,7 +8,7 @@ class AppContainer extends Component {
   render() {
     return (
       <Fragment>
-        { this.props.currentUser ? <App/> : <Login /> }
+        { localStorage.currentUser ? <App /> : <Login /> }
       </Fragment>
     )
   }

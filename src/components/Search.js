@@ -48,7 +48,6 @@ class Search extends Component {
   }
 
   persistTripToBackend = (currentLocation) => {
-    // debugger
     fetch(`${BASE_URL}/trips`, {
       headers: {
         'Accept': 'application/json',
@@ -56,7 +55,7 @@ class Search extends Component {
       },
       method: 'POST',
       body: JSON.stringify({
-        user_id: 1,
+        user_id: JSON.parse(localStorage.currentUser).user.id,
         location_id: currentLocation.id
       })
     })
