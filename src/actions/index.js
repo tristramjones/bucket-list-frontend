@@ -68,7 +68,10 @@ export const removeFilters = () => (dispatch) => {
 export const getAllAttractions = () => (dispatch) => {
   fetch(`${BASE_URL}/attractions`)
   .then(res=>res.json())
-  .then(attractions=>dispatch({ type: SET_ALL_ATTRACTIONS, payload: attractions }))
+  .then(attractions=>{
+    const myAttractions = attractions.filter(a=>a.user_id === JSON.parse(localStorage.currentUser).user.id)
+    dispatch({ type: SET_ALL_ATTRACTIONS, payload: myAttractions })
+  })
 }
 
 export const addAttraction = (attractionObj,toggle) => (dispatch) => {

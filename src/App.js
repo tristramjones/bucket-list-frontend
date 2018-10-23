@@ -6,15 +6,10 @@ import MapNav from './components/MapNav';
 import * as actions from './actions';
 import './App.css';
 
-const BASE_URL = 'http://localhost:3000/api/v1';
-
 class App extends Component {
 
   componentWillMount = () => {
-    fetch(`${BASE_URL}/attractions`)
-    .then(res=>res.json())
-    // .then(console.log)
-    .then(attractions=>this.props.getAllAttractions(attractions))
+    this.props.getAllAttractions()
   }
 
   render() {

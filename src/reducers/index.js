@@ -18,6 +18,7 @@ const reducer = (state=defaultState, action) => {
     case 'SET_CURRENT_TRIP':
       return { ...state, currentTrip: action.payload }
     case 'SET_ALL_ATTRACTIONS':
+      console.log(action.payload)
       return { ...state, attractions: action.payload }
     case 'SET_CURRENT_ATTRACTION':
       return { ...state, currentAttraction: action.payload }
