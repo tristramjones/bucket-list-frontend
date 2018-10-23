@@ -9,10 +9,10 @@ class MapNav extends Component {
   render() {
     return (
       <div className="map-nav-container" role="group">
-        <button className="map-nav-button" onClick={this.props.removeFilters}>Show All</button>
-        <button className="map-nav-button" onClick={()=>this.props.applyFoodFilter(this.props.attractions)}>Food</button>
-        <button className="map-nav-button" onClick={()=>this.props.applyEventFilter(this.props.attractions)}>Events</button>
-        <button className="map-nav-button" onClick={()=>this.props.applyAdventureFilter(this.props.attractions)}>Adventures</button>
+        <button onClick={this.props.removeFilters} className="map-nav-button" name="all">Show All</button>
+        <button onClick={()=>this.props.applyFoodFilter(this.props.attractions)} className="map-nav-button" name="food">Food</button>
+        <button onClick={()=>this.props.applyEventFilter(this.props.attractions)} className="map-nav-button" name="events">Events</button>
+        <button onClick={()=>this.props.applyAdventureFilter(this.props.attractions)} className="map-nav-button" name="adventures">Adventures</button>
       </div>
     );
   }
