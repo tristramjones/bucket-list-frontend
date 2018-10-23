@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { Header } from './components/Header';
+import Login from './components/Login';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -15,7 +16,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Fragment>
       <Header />
-      <App />
+      { localStorage.getItem('currentUser') !== null ? <App /> : <Login /> }
     </Fragment>
   </Provider>,
   document.getElementById('root')

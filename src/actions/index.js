@@ -1,4 +1,5 @@
 import {
+  SET_CURRENT_USER,
   ADD_LOCATION,
   SET_CURRENT_TRIP,
   SET_ALL_ATTRACTIONS,
@@ -15,6 +16,10 @@ import {
 } from './types.js'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
+
+export const setCurrentUser = (user) => (dispatch) => {
+  dispatch({ type: SET_CURRENT_USER, payload: user })
+}
 
 export const setNewMarker = (event) => (dispatch) => {
   dispatch({ type: NEW_MARKER, payload: event })
