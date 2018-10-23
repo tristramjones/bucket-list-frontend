@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions'
+import * as actions from '../actions';
 
 class Login extends Component {
   state = {
@@ -20,7 +20,6 @@ class Login extends Component {
 
   handleLogin = (event) => {
     event.preventDefault();
-    console.log(this.state)
     fetch("http://localhost:3000/api/v1/login", {
       method: 'POST',
       headers: {
@@ -33,13 +32,18 @@ class Login extends Component {
     })
     .then(res=>res.json())
     .then(user=>localStorage.currentUser = JSON.stringify(user))
-    console.log(localStorage.currentUser !== 'undefined' ? JSON.parse(localStorage.currentUser) : null)
-    // this.props.setCurrentUser(JSON.parse(localStorage.currentUser))
+
+    this.setUser()
   }
 
   handleSignup = (event) => {
     event.preventDefault();
-    console.log(event,this.state)
+  }
+
+  setUser = () => {
+    setTimeout(()=>{
+      this.props.setCurrentUser(JSON.parse(localStorage.currentUser))
+    },100)
   }
 
   render() {

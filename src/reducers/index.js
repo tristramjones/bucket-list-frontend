@@ -14,7 +14,6 @@ const defaultState = {
 const reducer = (state=defaultState, action) => {
   switch(action.type) {
     case 'SET_CURRENT_USER':
-    debugger
       return { ...state, currentUser: action.payload }
     case 'SET_CURRENT_TRIP':
       return { ...state, currentTrip: action.payload }
