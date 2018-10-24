@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+input:focus, button:focus {
+  outline: none;
+}
+
 .header {
   background-color: #292C34;
   height: 50px;
@@ -42,10 +46,46 @@
 }
 
 .forms-container {
-  padding: 40px 40px;
-  text-align: center;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 150px;
+}
+
+.form-heading {
+  margin-bottom: 15px;
+}
+
+.login-input {
+  width: 400px;
+  height: 40px;
+  margin: 10px auto;
+  border: 1px solid #CCC;
+  border-radius: 1px;
+  padding: 0 10px;
+  text-align: left;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.login-button {
+  width: 400px;
+  height: 40px;
+  margin: 10px 0 20px 0;
+  border: none;
+  border-radius: 1px;
+  background-color: #5ED0D3;
+  color: #292C34;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+  align-self: baseline;
+}
+
+.login-button:hover {
+  background-color: #F9F9F9;
+  color: #5ED0D3;
+  border: 1px solid #5ED0D3;
+  border-radius: 1px;
 }
 
 .hyperlink {
@@ -55,17 +95,13 @@
   cursor: pointer;
 }
 
-.form-heading {
-  margin-bottom: 15px;
-}
-
 .search-container {
   padding: 40px 40px;
   text-align: center;
 }
 
 .search-input {
-  width: 270px;
+  width: 400px;
   height: 40px;
   margin: 20px 0;
   border-style: solid;
@@ -178,7 +214,7 @@
 
 .leaflet-container {
   margin: 0 auto;
-  height: 400px;
+  height: 700px;
   width: 67%;
   border-left: 1px solid #CCC;
   border-right: 1px solid #CCC;

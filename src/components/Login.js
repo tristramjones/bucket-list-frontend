@@ -71,23 +71,23 @@ class Login extends Component {
           this.state.displayLogin
           ?
           <div className="login-form-container">
-            <h3 className="form-heading">Welcome back to BucketList!</h3>
+            <h1 className="form-heading">Welcome back to BucketList!</h1>
             <h5 className="invalid">{ this.state.errorMessage }</h5>
             <form onSubmit={this.handleLogin}>
               <input
                 data-label="loginUsername"
-                className="popup-input"
+                className="login-input"
                 onChange={this.handleLoginChange}
                 placeholder="Username">
               </input><br></br>
               <input
                 data-label="loginPassword"
-                className="popup-input"
+                className="login-input"
                 onChange={this.handleLoginChange}
                 placeholder="Password">
               </input><br></br>
               <input
-                className="popup-button"
+                className="login-button"
                 type="submit"
                 value="Login">
               </input>
@@ -96,22 +96,22 @@ class Login extends Component {
           </div>
           :
           <div className="signup-form-container">
-            <h3 className="form-heading">Welcome to BucketList!</h3>
+            <h1 className="form-heading">Welcome to BucketList!</h1>
             <form onSubmit={this.handleSignup}>
               <input
                 data-label="signupUsername"
-                className="popup-input"
+                className="login-input"
                 onChange={this.handleSignupChange}
                 placeholder="Username">
               </input><br></br>
               <input
                 data-label="signupPassword"
-                className="popup-input"
+                className="login-input"
                 onChange={this.handleSignupChange}
                 placeholder="Password">
               </input><br></br>
               <input
-                className="popup-button"
+                className="login-button"
                 type="submit"
                 value="Signup">
               </input>
