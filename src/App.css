@@ -105,7 +105,7 @@
   border-width: 1px 1px 1px 0;
 }
 
-.invalid-city {
+.invalid {
   font-style: italic;
   color: red;
   font-weight: normal;

@@ -9,6 +9,7 @@ class Login extends Component {
     signupUsername: '',
     signupPassword: '',
     displayLogin: true,
+    errorMessage: null,
   }
 
   componentWillMount = () => {
@@ -35,11 +36,18 @@ class Login extends Component {
         user: { username: this.state.loginUsername, password: this.state.loginPassword }
         })
     })
-    .then(res=>res.json())
-    .then(user=>localStorage.currentUser = JSON.stringify(user))
-
-    this.setUser()
-    this.props.setCurrentTrip(null)
+    .then(res=>{
+      if(!res.ok) { throw res }
+      return res.json()
+    })
+    .then(user=>{
+      this.setState({ errorMessage: null })
+      localStorage.currentUser = JSON.stringify(user);
+      this.setUser();
+      this.props.setCurrentTrip(null);
+    })
+    .catch(err=>err.json()
+    .then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' })))
   }
 
   handleSignup = (event) => {
@@ -64,6 +72,7 @@ class Login extends Component {
           ?
           <div className="login-form-container">
             <h3 className="form-heading">Welcome back to BucketList!</h3>
+            <h5 className="invalid">{ this.state.errorMessage }</h5>
             <form onSubmit={this.handleLogin}>
               <input
                 data-label="loginUsername"

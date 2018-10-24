@@ -68,7 +68,7 @@ class Search extends Component {
     return (
       <div className="search-container">
         <h3>Plan Your Next Adventure</h3>
-        { this.state.errorMessage ? <h5 className="invalid-city">Please enter a valid city name</h5> : null }
+        { this.state.errorMessage ? <h5 className="invalid">Please enter a valid city name</h5> : null }
         <div>
           <form>
             <input
