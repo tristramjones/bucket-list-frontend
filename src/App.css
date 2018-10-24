@@ -5,12 +5,33 @@
 .header {
   background-color: #292C34;
   height: 50px;
-  color: #F9F9F9;
-  display: flex;
-  justify-content: flex-start;
-  font-size: 20px;
-  align-items: center;
   padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  color: #F9F9F9;
+  font-size: 20px;
+}
+
+.header-button {
+  width: 100px;
+  height: 30px;
+  border: none;
+  border-radius: 1px;
+  background-color: #5ED0D3;
+  color: #292C34;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.header-button:hover {
+  background-color: #F9F9F9;
+  color: #5ED0D3;
+  border: 1px solid #5ED0D3;
+  border-radius: 1px;
+  cursor: pointer;
 }
 
 .app-container {
@@ -25,6 +46,17 @@
   text-align: center;
   display: flex;
   flex-direction: column;
+}
+
+.hyperlink {
+  font-style: italic;
+  color: blue;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.form-heading {
+  margin-bottom: 15px;
 }
 
 .search-container {

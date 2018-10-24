@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import AppContainer from './containers/AppContainer';
-import { Header } from './components/Header';
+import Header from './components/Header';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';

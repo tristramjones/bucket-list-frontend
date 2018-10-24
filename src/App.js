@@ -10,6 +10,9 @@ class App extends Component {
 
   componentWillMount = () => {
     this.props.getAllAttractions()
+    setTimeout(()=>{
+      this.props.setCurrentUser(JSON.parse(localStorage.currentUser))
+    },200)
   }
 
   render() {

@@ -8,6 +8,7 @@ class Login extends Component {
     loginPassword: '',
     signupUsername: '',
     signupPassword: '',
+    displayLogin: true,
   }
 
   handleLoginChange = (event) => {
@@ -40,60 +41,74 @@ class Login extends Component {
     event.preventDefault();
   }
 
+  handleFormToggle = (event) => {
+    this.setState({ displayLogin: !this.state.displayLogin })
+  }
+
   setUser = () => {
     setTimeout(()=>{
       this.props.setCurrentUser(JSON.parse(localStorage.currentUser))
-    },100)
+    },200)
   }
 
   render() {
     return (
       <div className="forms-container">
-        <div className="login-form-container">
-          <form onSubmit={this.handleLogin}>
-            <input
-              data-label="loginUsername"
-              className="popup-input"
-              onChange={this.handleLoginChange}
-              placeholder="Username">
-            </input><br></br>
-            <input
-              data-label="loginPassword"
-              className="popup-input"
-              onChange={this.handleLoginChange}
-              placeholder="Password">
-            </input><br></br>
-            <input
-              className="popup-button"
-              type="submit"
-              value="Login">
-            </input>
-          </form>
-        </div>
-        <div className="signup-form-container">
-          <form onSubmit={this.handleSignup}>
-            <input
-              data-label="signupUsername"
-              className="popup-input"
-              onChange={this.handleSignupChange}
-              placeholder="Username">
-            </input><br></br>
-            <input
-              data-label="signupPassword"
-              className="popup-input"
-              onChange={this.handleSignupChange}
-              placeholder="Password">
-            </input><br></br>
-            <input
-              className="popup-button"
-              type="submit"
-              value="Signup">
-            </input>
-          </form>
-        </div>
+        {
+          this.state.displayLogin
+          ?
+          <div className="login-form-container">
+            <h3 className="form-heading">Welcome back to BucketList!</h3>
+            <form onSubmit={this.handleLogin}>
+              <input
+                data-label="loginUsername"
+                className="popup-input"
+                onChange={this.handleLoginChange}
+                placeholder="Username">
+              </input><br></br>
+              <input
+                data-label="loginPassword"
+                className="popup-input"
+                onChange={this.handleLoginChange}
+                placeholder="Password">
+              </input><br></br>
+              <input
+                className="popup-button"
+                type="submit"
+                value="Login">
+              </input>
+            </form>
+          <h5 className="hyperlink" onClick={this.handleFormToggle}>Click to create a new account</h5>
+          </div>
+          :
+          <div className="signup-form-container">
+            <h3 className="form-heading">Welcome to BucketList!</h3>
+            <form onSubmit={this.handleSignup}>
+              <input
+                data-label="signupUsername"
+                className="popup-input"
+                onChange={this.handleSignupChange}
+                placeholder="Username">
+              </input><br></br>
+              <input
+                data-label="signupPassword"
+                className="popup-input"
+                onChange={this.handleSignupChange}
+                placeholder="Password">
+              </input><br></br>
+              <input
+                className="popup-button"
+                type="submit"
+                value="Signup">
+              </input>
+            </form>
+            <h5 className="hyperlink" onClick={this.handleFormToggle}>Back to login</h5>
+          </div>
+        }
       </div>
     )
   }
-}
+
+} // end of Login component
 
 export default connect(null,actions)(Login);
