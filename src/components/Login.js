@@ -11,6 +11,10 @@ class Login extends Component {
     displayLogin: true,
   }
 
+  componentWillMount = () => {
+    this.props.setCurrentTrip(null)
+  }
+
   handleLoginChange = (event) => {
     this.setState({ [event.target.dataset.label]: event.target.value })
   }
@@ -35,6 +39,7 @@ class Login extends Component {
     .then(user=>localStorage.currentUser = JSON.stringify(user))
 
     this.setUser()
+    this.props.setCurrentTrip(null)
   }
 
   handleSignup = (event) => {

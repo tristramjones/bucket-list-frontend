@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <div className="app-container">
         <Search />
-        { this.props.locations.length > 0
+        { this.props.currentTrip
           ?
           <div className="map-container">
             <MapNav />
@@ -36,7 +36,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    locations: state.locations
+    currentTrip: state.currentTrip
   }
 }
 
