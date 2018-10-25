@@ -109,6 +109,7 @@ class Login extends Component {
                 data-label="loginPassword"
                 className="login-input"
                 onChange={this.handleLoginChange}
+                type="password"
                 placeholder="Password">
               </input><br></br>
               <input
@@ -133,6 +134,7 @@ class Login extends Component {
                 data-label="signupPassword"
                 className="login-input"
                 onChange={this.handleSignupChange}
+                type="password"
                 placeholder="Password">
               </input><br></br>
               <input
