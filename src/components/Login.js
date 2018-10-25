@@ -29,12 +29,12 @@ class Login extends Component {
     fetch("http://localhost:3000/api/v1/login", {
       method: 'POST',
       headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
       body: JSON.stringify({
         user: { username: this.state.loginUsername, password: this.state.loginPassword }
-        })
+      })
     })
     .then(res=>{
       if(!res.ok) { throw res }
@@ -55,12 +55,12 @@ class Login extends Component {
     fetch("http://localhost:3000/api/v1/users", {
       method: 'POST',
       headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
       body: JSON.stringify({
         user: { username: this.state.loginUsername, password: this.state.loginPassword }
-        })
+      })
     })
     .then(res=>{
       if(!res.ok) { throw res }

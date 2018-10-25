@@ -109,13 +109,13 @@ class BasicPopup extends Component {
           </div>
           <img
             className="edit-icon"
-            src={process.env.PUBLIC_URL + '/edit-icon.png'}
+            src={require('../assets/edit-icon.png')}
             onClick={this.handleEditPopup}
             alt="edit-icon"
             />
           <img
             className="delete-icon"
-            src={process.env.PUBLIC_URL + '/delete-icon.png'}
+            src={require('../assets/delete-icon.png')}
             onClick={this.handleDeleteAttraction}
             alt="delete-icon"
             />
