@@ -2,15 +2,47 @@
   box-sizing: border-box;
 }
 
+input:focus, button:focus {
+  outline: none;
+}
+
 .header {
   background-color: #292C34;
   height: 50px;
-  color: #F9F9F9;
-  display: flex;
-  justify-content: flex-start;
-  font-size: 20px;
-  align-items: center;
   padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  color: #F9F9F9;
+  font-size: 20px;
+  display: flex;
+}
+
+.logo img {
+  margin-top: 2px;
+  margin-right: 10px;
+  height: 24px;
+}
+
+.header-button {
+  width: 100px;
+  height: 30px;
+  border: none;
+  border-radius: 1px;
+  background-color: #5ED0D3;
+  color: #292C34;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.header-button:hover {
+  background-color: #F9F9F9;
+  color: #5ED0D3;
+  border: 1px solid #5ED0D3;
+  border-radius: 1px;
+  cursor: pointer;
 }
 
 .app-container {
@@ -20,13 +52,63 @@
   flex-direction: column;
 }
 
+.forms-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 150px;
+}
+
+.form-heading {
+  margin-bottom: 15px;
+}
+
+.login-input {
+  width: 400px;
+  height: 40px;
+  margin: 10px auto;
+  border: 1px solid #CCC;
+  border-radius: 1px;
+  padding: 0 10px;
+  text-align: left;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.login-button {
+  width: 400px;
+  height: 40px;
+  margin: 10px 0 20px 0;
+  border: none;
+  border-radius: 1px;
+  background-color: #5ED0D3;
+  color: #292C34;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+  align-self: baseline;
+}
+
+.login-button:hover {
+  background-color: #F9F9F9;
+  color: #5ED0D3;
+  border: 1px solid #5ED0D3;
+  border-radius: 1px;
+}
+
+.hyperlink {
+  font-style: italic;
+  color: blue;
+  font-weight: normal;
+  cursor: pointer;
+}
+
 .search-container {
   padding: 40px 40px;
   text-align: center;
 }
 
 .search-input {
-  width: 270px;
+  width: 400px;
   height: 40px;
   margin: 20px 0;
   border-style: solid;
@@ -66,11 +148,25 @@
   border-width: 1px 1px 1px 0;
 }
 
-.invalid-city {
+.invalid {
   font-style: italic;
   color: red;
   font-weight: normal;
   margin-top: 10px;
+}
+
+.instructions-container {
+  position: absolute;
+  top: 40%;
+  left: 35%;
+}
+
+ul {
+  list-style-image: url('./assets/airplane.png');
+}
+
+li {
+  margin: 15px;
 }
 
 .map-nav-container {
@@ -139,7 +235,7 @@
 
 .leaflet-container {
   margin: 0 auto;
-  height: 400px;
+  height: 700px;
   width: 67%;
   border-left: 1px solid #CCC;
   border-right: 1px solid #CCC;

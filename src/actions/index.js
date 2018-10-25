@@ -1,4 +1,5 @@
 import {
+  SET_CURRENT_USER,
   ADD_LOCATION,
   SET_CURRENT_TRIP,
   SET_ALL_ATTRACTIONS,
@@ -15,6 +16,10 @@ import {
 } from './types.js'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
+
+export const setCurrentUser = (user) => (dispatch) => {
+  dispatch({ type: SET_CURRENT_USER, payload: user })
+}
 
 export const setNewMarker = (event) => (dispatch) => {
   dispatch({ type: NEW_MARKER, payload: event })
@@ -63,7 +68,10 @@ export const removeFilters = () => (dispatch) => {
 export const getAllAttractions = () => (dispatch) => {
   fetch(`${BASE_URL}/attractions`)
   .then(res=>res.json())
-  .then(attractions=>dispatch({ type: SET_ALL_ATTRACTIONS, payload: attractions }))
+  .then(attractions=>{
+    const myAttractions = attractions.filter(a=>a.user_id === JSON.parse(localStorage.currentUser).user.id)
+    dispatch({ type: SET_ALL_ATTRACTIONS, payload: myAttractions })
+  })
 }
 
 export const addAttraction = (attractionObj,toggle) => (dispatch) => {

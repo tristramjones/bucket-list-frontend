@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import { Header } from './components/Header';
+import AppContainer from './containers/AppContainer';
+import Header from './components/Header';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -15,7 +15,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Fragment>
       <Header />
-      <App />
+      <AppContainer />
     </Fragment>
   </Provider>,
   document.getElementById('root')

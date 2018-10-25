@@ -3,6 +3,7 @@ const defaultState = {
   locations: [],
   attractions: [],
   filteredAttractions: [],
+  currentUser: null,
   currentTrip: null,
   newMarker: null,
   currentAttraction: null,
@@ -12,7 +13,11 @@ const defaultState = {
 
 const reducer = (state=defaultState, action) => {
   switch(action.type) {
+    case 'SET_CURRENT_USER':
+      return { ...state, currentUser: action.payload }
     case 'SET_CURRENT_TRIP':
+    console.log(state.currentTrip)
+    console.log(state.attractions)
       return { ...state, currentTrip: action.payload }
     case 'SET_ALL_ATTRACTIONS':
       return { ...state, attractions: action.payload }

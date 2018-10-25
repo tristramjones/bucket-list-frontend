@@ -17,7 +17,11 @@ class Search extends Component {
 
   handleSearch = (event) => {
     event.preventDefault();
+    this.props.newPopupToggle(false);
+    this.props.basicPopupToggle(false);
+
     const query = this.state.input.split(' ').join('%20').toLowerCase();
+
     fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&city=' + query)
     .then(res=>res.json())
     .then(locations=> {
@@ -44,12 +48,10 @@ class Search extends Component {
       })
     })
     .then(res=>res.json())
-    // .then(console.log)
     .then(location_obj=>this.persistTripToBackend(location_obj))
   }
 
   persistTripToBackend = (currentLocation) => {
-    // debugger
     fetch(`${BASE_URL}/trips`, {
       headers: {
         'Accept': 'application/json',
@@ -57,7 +59,7 @@ class Search extends Component {
       },
       method: 'POST',
       body: JSON.stringify({
-        user_id: 1,
+        user_id: JSON.parse(localStorage.currentUser).user.id,
         location_id: currentLocation.id
       })
     })
@@ -66,10 +68,11 @@ class Search extends Component {
   }
 
   render() {
+    console.log(this.props.currentTrip)
     return (
       <div className="search-container">
-        <h3>Plan Your Next Adventure</h3>
-        { this.state.errorMessage ? <h5 className="invalid-city">Please enter a valid city name</h5> : null }
+        <h1>Plan Your Next Adventure</h1>
+        { this.state.errorMessage ? <h5 className="invalid">Please enter a valid city name</h5> : null }
         <div>
           <form>
             <input
