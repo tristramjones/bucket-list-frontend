@@ -3,7 +3,7 @@ import { Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
 import * as actions from '../actions'
 
-const BASE_URL = 'http://localhost:3000/api/v1';
+const BASE_URL = 'https://bucket-lister-backend.herokuapp.com/api/v1';
 
 class NewPopup extends Component {
   state = {
@@ -14,7 +14,7 @@ class NewPopup extends Component {
 
   persistAttraction = (event) => {
     event.preventDefault();
-    
+
     const title = this.state.popupTitle
     const category = this.state.popupCategory
     const desc = this.state.popupDescription
