@@ -17,6 +17,13 @@ input:focus, button:focus {
 .logo {
   color: #F9F9F9;
   font-size: 20px;
+  display: flex;
+}
+
+.logo img {
+  margin-top: 2px;
+  margin-right: 10px;
+  height: 24px;
 }
 
 .header-button {
@@ -146,6 +153,20 @@ input:focus, button:focus {
   color: red;
   font-weight: normal;
   margin-top: 10px;
+}
+
+.instructions-container {
+  position: absolute;
+  top: 40%;
+  left: 35%;
+}
+
+ul {
+  list-style-image: url('./assets/airplane.png');
+}
+
+li {
+  margin: 15px;
 }
 
 .map-nav-container {

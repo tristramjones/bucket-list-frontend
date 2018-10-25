@@ -12,7 +12,10 @@ class Header extends Component {
   render() {
     return (
       <header className="header">
-        <p className="logo">BucketList</p>
+        <div className="logo">
+          <img src={require("../assets/logo.png")} alt="bucket-list-logo"/>
+          <p>BucketList</p>
+        </div>
         {
           this.props.currentUser
           ?

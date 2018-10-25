@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Search from './components/Search';
 import GeoMap from './components/GeoMap';
 import MapNav from './components/MapNav';
+import { Instructions } from './components/Instructions';
 import * as actions from './actions';
 import './App.css';
 
@@ -26,7 +27,7 @@ class App extends Component {
             <GeoMap />
           </div>
           :
-          null
+          <Instructions />
         }
       </div>
     );
