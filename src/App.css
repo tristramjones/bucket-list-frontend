@@ -1,11 +1,9 @@
 * {
   box-sizing: border-box;
 }
-
 input:focus, button:focus {
   outline: none;
 }
-
 .header {
   background-color: #292C34;
   height: 50px;
@@ -13,19 +11,16 @@ input:focus, button:focus {
   display: flex;
   justify-content: space-between;
 }
-
 .logo {
   color: #F9F9F9;
   font-size: 20px;
   display: flex;
 }
-
 .logo img {
   margin-top: 2px;
   margin-right: 10px;
   height: 24px;
 }
-
 .header-button {
   width: 100px;
   height: 30px;
@@ -36,7 +31,6 @@ input:focus, button:focus {
   font-size: 16px;
   font-family: 'Raleway', sans-serif;
 }
-
 .header-button:hover {
   background-color: #F9F9F9;
   color: #5ED0D3;
@@ -44,25 +38,21 @@ input:focus, button:focus {
   border-radius: 1px;
   cursor: pointer;
 }
-
 .app-container {
   height: 100vh;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-
 .forms-container {
   display: flex;
   justify-content: center;
   text-align: center;
   margin-top: 150px;
 }
-
 .form-heading {
   margin-bottom: 15px;
 }
-
 .login-input {
   width: 400px;
   height: 40px;
@@ -74,7 +64,6 @@ input:focus, button:focus {
   font-size: 16px;
   font-family: 'Raleway', sans-serif;
 }
-
 .login-button {
   width: 400px;
   height: 40px;
@@ -87,26 +76,22 @@ input:focus, button:focus {
   font-family: 'Raleway', sans-serif;
   align-self: baseline;
 }
-
 .login-button:hover {
   background-color: #F9F9F9;
   color: #5ED0D3;
   border: 1px solid #5ED0D3;
   border-radius: 1px;
 }
-
 .hyperlink {
   font-style: italic;
   color: blue;
   font-weight: normal;
   cursor: pointer;
 }
-
 .search-container {
   padding: 40px 40px;
   text-align: center;
 }
-
 .search-input {
   width: 400px;
   height: 40px;
@@ -119,7 +104,6 @@ input:focus, button:focus {
   font-size: 16px;
   font-family: 'Raleway', sans-serif;
 }
-
 .search-button {
   width: 50px;
   height: 40px;
@@ -138,7 +122,6 @@ input:focus, button:focus {
   /* -webkit-transition: background 0.9s ease-in-out;
   transition: background 0.9s ease-in-out; */
 }
-
 .search-button:hover {
   background-color: #F1F1F1;
   cursor: pointer;
@@ -147,29 +130,49 @@ input:focus, button:focus {
   border-color: #CCC;
   border-width: 1px 1px 1px 0;
 }
-
 .invalid {
   font-style: italic;
   color: red;
   font-weight: normal;
   margin-top: 10px;
 }
-
 .instructions-container {
   position: absolute;
   top: 40%;
   left: 35%;
 }
-
 ul {
   list-style-image: url('./assets/airplane.png');
 }
-
 li {
   margin: 15px;
 }
-
+.filter-button-container {
+  display: flex;
+  justify-content: center;
+}
+.filter-button-container button {
+  text-decoration: none;
+  border: none;
+  height: 30px;
+  width: 200px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  font-size: 12px;
+  margin-bottom: -1px;
+}
+.filter-button-container button:hover {
+  background-color: #CCC;
+  cursor: pointer;
+}
+/* .map-nav-container:hover {
+  height: 0px;
+} */
 .map-nav-container {
+  /* -webkit-transition-property: all;
+  -webkit-transition-duration: 0.5s;
+  transition-property: all;
+  transition-duration: 0.5s; */
   margin: 0 auto;
   height: 40px;
   width: 67%;
@@ -180,7 +183,6 @@ li {
   background-color: #F9F9F9;
   display: flex;
 }
-
 .map-nav-button {
   width: calc(100%/3);
   font-size: 16px;
@@ -190,51 +192,42 @@ li {
 	position: relative;
   border: none;
 }
-
 .map-nav-button[name="all"] {
   background-color: #292C34;
   color: #F9F9F9;
 }
-
 .map-nav-button[name="all"]:hover {
   background-color: #F9F9F9;
   color: #292C34;
 }
-
 .map-nav-button[name="food"] {
   background-color: #5ED0D3;
 }
-
 .map-nav-button[name="food"]:hover {
   background-color: #F9F9F9;
   color: #5ED0D3;
 }
-
 .map-nav-button[name="events"] {
   background-color: #FD2E58;
 }
-
 .map-nav-button[name="events"]:hover {
   background-color: #F9F9F9;
   color: #FD2E58;
 }
-
 .map-nav-button[name="adventures"] {
   background-color: #EFA83A;
 }
-
 .map-nav-button[name="adventures"]:hover {
   background-color: #F9F9F9;
   color: #EFA83A;
 }
-
 .map-nav-button:hover {
 	background-color: #F9F9F9;
 	text-shadow: none;
 }
-
 .leaflet-container {
   margin: 0 auto;
+  margin-bottom: 40px;
   height: 700px;
   width: 67%;
   border-left: 1px solid #CCC;
@@ -242,37 +235,30 @@ li {
   border-bottom: 1px solid #CCC;
   border-radius: 1px;
 }
-
 #mapid {
   height: 100%;
   width: 100%;
 }
-
 .popup-container {
   width: 200px;
   height: 200px;
 }
-
 .leaflet-popup-content p {
   margin: 0;
 }
-
 .popup-title {
   font-size: 28px;
 }
-
 .popup-category {
   font-size: 14px;
   font-style: italic;
 }
-
 .popup-description {
   margin-top: 13px;
   font-size: 16px;
   height: 125px;
   overflow: auto;
 }
-
 .popup-input {
   width: 200px;
   height: 30px;
@@ -284,7 +270,6 @@ li {
   font-size: 16px;
   font-family: 'Raleway', sans-serif;
 }
-
 .select-div select {
   width: 200px;
   height: 30px;
@@ -297,7 +282,6 @@ li {
   /* -webkit-appearance: none;
   -webkit-border-radius: 1px; */
 }
-
 .popup-button {
   width: 200px;
   height: 40px;
@@ -310,21 +294,18 @@ li {
   font-family: 'Raleway', sans-serif;
   align-self: baseline;
 }
-
 .popup-button:hover {
   background-color: #F9F9F9;
   color: #5ED0D3;
   border: 1px solid #5ED0D3;
   border-radius: 1px;
 }
-
 .popup-container > img.edit-icon {
   width: 20px;
   position: absolute;
   left: 200px;
   top: 190px;
 }
-
 .popup-container > img.delete-icon {
   width: 25px;
   height: 22px;

@@ -9,6 +9,7 @@ const defaultState = {
   currentAttraction: null,
   isNewPopupDisplayed: false,
   isBasicPopupDisplayed: false,
+  areFiltersDisplayed: false,
 }
 
 const reducer = (state=defaultState, action) => {
@@ -16,8 +17,6 @@ const reducer = (state=defaultState, action) => {
     case 'SET_CURRENT_USER':
       return { ...state, currentUser: action.payload }
     case 'SET_CURRENT_TRIP':
-    console.log(state.currentTrip)
-    console.log(state.attractions)
       return { ...state, currentTrip: action.payload }
     case 'SET_ALL_ATTRACTIONS':
       return { ...state, attractions: action.payload }
@@ -41,6 +40,8 @@ const reducer = (state=defaultState, action) => {
       return { ...state, filteredAttractions: action.payload }
     case 'RESET_FILTER':
       return { ...state, filteredAttractions: [] }
+    case 'TOGGLE_FILTERS':
+      return { ...state, areFiltersDisplayed: action.payload }
     case 'ADD_ATTRACTION':
       if(state.filteredAttractions.length > 0) {
         return { ...state, attractions: [...state.attractions, action.payload], filteredAttractions: [...state.filteredAttractions, action.payload] }
