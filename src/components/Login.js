@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
+const BASE_URL = 'https://bucket-lister-backend.herokuapp.com/api/v1'
+
 class Login extends Component {
   state = {
     loginUsername: '',
@@ -26,7 +28,7 @@ class Login extends Component {
 
   handleLogin = (event) => {
     event.preventDefault();
-    fetch("http://localhost:3000/api/v1/login", {
+    fetch(`${BASE_URL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +54,7 @@ class Login extends Component {
 
   handleSignup = (event) => {
     event.preventDefault();
-    fetch("http://localhost:3000/api/v1/users", {
+    fetch(`${BASE_URL}/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

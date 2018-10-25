@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 import '../App.css';
 
-const BASE_URL = 'http://localhost:3000/api/v1';
+const BASE_URL = 'https://bucket-lister-backend.herokuapp.com/api/v1';
 
 class Search extends Component {
   state = {
