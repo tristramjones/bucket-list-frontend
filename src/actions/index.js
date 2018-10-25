@@ -13,6 +13,7 @@ import {
   FILTER_EVENTS,
   FILTER_ADVENTURES,
   RESET_FILTER,
+  TOGGLE_FILTERS,
 } from './types.js'
 
 const BASE_URL = 'http://localhost:3000/api/v1';
@@ -63,6 +64,10 @@ export const applyAdventureFilter = (attractions) => (dispatch) => {
 
 export const removeFilters = () => (dispatch) => {
   dispatch({ type: RESET_FILTER, payload: [] })
+}
+
+export const toggleFilters = (toggle) => (dispatch) => {
+  dispatch({ type: TOGGLE_FILTERS, payload: toggle })
 }
 
 export const getAllAttractions = () => (dispatch) => {

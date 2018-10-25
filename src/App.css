@@ -169,6 +169,26 @@ li {
   margin: 15px;
 }
 
+.filter-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.filter-button-container button {
+  text-decoration: none;
+  border: none;
+  height: 30px;
+  width: 200px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  font-size: 12px;
+}
+
+.filter-button-container button:hover {
+  background-color: #CCC;
+  cursor: pointer;
+}
+
 .map-nav-container {
   margin: 0 auto;
   height: 40px;

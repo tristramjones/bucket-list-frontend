@@ -68,7 +68,6 @@ class Search extends Component {
   }
 
   render() {
-    console.log(this.props.currentTrip)
     return (
       <div className="search-container">
         <h1>Plan Your Next Adventure</h1>

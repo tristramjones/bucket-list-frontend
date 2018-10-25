@@ -4,6 +4,7 @@ import Search from './components/Search';
 import GeoMap from './components/GeoMap';
 import MapNav from './components/MapNav';
 import { Instructions } from './components/Instructions';
+import FilterButton from './components/FilterButton';
 import * as actions from './actions';
 import './App.css';
 
@@ -23,7 +24,8 @@ class App extends Component {
         { this.props.currentTrip
           ?
           <div className="map-container">
-            <MapNav />
+            <FilterButton />
+            { this.props.areFiltersDisplayed ? <MapNav /> : null }
             <GeoMap />
           </div>
           :
@@ -37,7 +39,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentTrip: state.currentTrip
+    currentTrip: state.currentTrip,
+    areFiltersDisplayed: state.areFiltersDisplayed,
   }
 }
 
