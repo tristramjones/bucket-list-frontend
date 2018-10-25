@@ -52,6 +52,28 @@ class Login extends Component {
 
   handleSignup = (event) => {
     event.preventDefault();
+    fetch("http://localhost:3000/api/v1/users", {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+      body: JSON.stringify({
+        user: { username: this.state.loginUsername, password: this.state.loginPassword }
+        })
+    })
+    .then(res=>{
+      if(!res.ok) { throw res }
+      return res.json()
+    })
+    .then(user=>{
+      this.setState({ errorMessage: null })
+      localStorage.currentUser = JSON.stringify(user);
+      this.setUser();
+      this.props.setCurrentTrip(null);
+    })
+    .catch(err=>err.json()
+    .then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' })))
   }
 
   handleFormToggle = (event) => {
