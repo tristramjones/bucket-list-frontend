@@ -4,7 +4,7 @@ import '../App.css';
 export const Instructions = () => {
   return (
     <div className="instructions-container">
-      <h2>Start exploring by...</h2>
+      <h2>Start exploring by doing one of the following</h2>
       <ul>
         <li>Search anywhere in the world by city name</li>
         <li>Click on the map to create bucket list items</li>

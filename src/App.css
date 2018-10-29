@@ -137,9 +137,14 @@ input:focus, button:focus {
   margin-top: 10px;
 }
 .instructions-container {
-  position: absolute;
+  /* position: absolute;
   top: 40%;
-  left: 35%;
+  left: 35%; */
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 ul {
   list-style-image: url('./assets/airplane.png');
