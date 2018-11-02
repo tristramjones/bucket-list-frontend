@@ -20,6 +20,9 @@ I moved to New York City from Utah and wanted this app. Google docs, Yelp, etc. 
 - Dynamic map center that changes based on user search
 - Filter buttons to render some of all of the markers on the map
 
+## Setup
+Clone down this repository as well as the [BucketList backend](https://github.com/tristramjones/bucket-lister-backend). Visit the backend repo and follow the setup instructions. *Do not proceed until you've done so.* Now that you have your backend server running, you will need node and npm installed globally on your machine for the client. Then run `npm i && npm start` from the main client directory. Select "Yes" when prompted to run the client on a different port.
+
 ## Contribute
 Thanks for your interest in contributing to BucketList!
 
