@@ -33,7 +33,7 @@ The following is a set of guidelines for contributing to the BucketList client.
 Review the documentation for [OpenStreetMap](https://wiki.openstreetmap.org/wiki/Nominatim) and [react-leaflet](https://react-leaflet.js.org/).
 
 ### Issues
-Before submitting a new issue ensure that one has not already been created by reviewing the open issues. If your bug is unique to the currently open issues, submit a new one here.
+Before submitting a new issue ensure that one has not already been created by reviewing the [open issues](https://github.com/tristramjones/bucket-lister-frontend/issues). If your bug is unique to the currently open issues, submit a new one [here](https://github.com/tristramjones/bucket-lister-frontend/issues/new).
 
 #### Write detailed information
 Detailed information is very helpful to understand an issue.
