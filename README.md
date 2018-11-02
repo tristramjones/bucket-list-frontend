@@ -46,8 +46,10 @@ Pull Requests are always welcome. Ensure that you've run `npm i` before creating
 - The relevant issue number, if applicable.
 
 
-          ---------------------------------------------------------------------------------------------------------
-          
+
+
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
