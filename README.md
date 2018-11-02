@@ -7,11 +7,7 @@ This is interactive travel and adventure planner for those with wanderlust. The 
 I moved to New York City from Utah and wanted this app. Google docs, Yelp, etc. can only get you so far. I wanted a way to record information about things I was interested in and have it all displayed on a map.
 
 ## Tech used
-- React.js
-- Redux.js
-- Leaflet
-- OpenStreetMap API
-- react-leaflet
+React.js, Redux.js, OpenStreetMap, react-leaflet, custom CSS, Thunk
 
 ## Features
 - Custom markers that respond to click events on the map both for new marker creation and to render an existing marker's popup
