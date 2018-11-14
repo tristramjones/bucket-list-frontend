@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
 import * as actions from '../actions'
-
-const BASE_URL = 'https://bucketlistbackend.herokuapp.com/api/v1';
-// const BASE_URL = 'http://localhost:3000/api/v1';
+import { BASE_URL } from '../API';
 
 class NewPopup extends Component {
   state = {

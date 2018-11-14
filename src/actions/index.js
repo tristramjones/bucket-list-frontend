@@ -14,10 +14,8 @@ import {
   FILTER_ADVENTURES,
   RESET_FILTER,
   TOGGLE_FILTERS,
-} from './types.js'
-
-const BASE_URL = 'https://bucketlistbackend.herokuapp.com/api/v1';
-// const BASE_URL = 'http://localhost:3000/api/v1';
+} from './types.js';
+import { BASE_URL } from '../API';
 
 export const setCurrentUser = (user) => (dispatch) => {
   dispatch({ type: SET_CURRENT_USER, payload: user })
