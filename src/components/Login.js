@@ -75,8 +75,8 @@ class Login extends Component {
       this.setUser();
       this.props.setCurrentTrip(null);
     })
-    .catch(err=>err.json()
-    .then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' })));
+    // .catch(err=>err.json()
+    // .then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' })));
   }
 
   handleFormToggle = (event) => {
