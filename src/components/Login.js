@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-// const BASE_URL = 'https://bucket-lister-backend.herokuapp.com/api/v1'
-const BASE_URL = 'http://localhost:3000/api/v1'
+const BASE_URL = 'https://bucketlistbackend.herokuapp.com/api/v1';
+// const BASE_URL = 'http://localhost:3000/api/v1'
 
 class Login extends Component {
   state = {

@@ -16,8 +16,8 @@ import {
   TOGGLE_FILTERS,
 } from './types.js'
 
-// const BASE_URL = 'https://bucket-lister-backend.herokuapp.com/api/v1';
-const BASE_URL = 'http://localhost:3000/api/v1';
+const BASE_URL = 'https://bucketlistbackend.herokuapp.com/api/v1';
+// const BASE_URL = 'http://localhost:3000/api/v1';
 
 export const setCurrentUser = (user) => (dispatch) => {
   dispatch({ type: SET_CURRENT_USER, payload: user })
