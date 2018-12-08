@@ -48,13 +48,14 @@ input:focus, button:focus {
   display: flex;
   justify-content: center;
   text-align: center;
-  margin-top: 150px;
+  margin-top: 20vh;
 }
 .form-heading {
   margin-bottom: 15px;
 }
 .login-input {
-  width: 400px;
+  width: 30vw;
+  min-width: 300px;
   height: 40px;
   margin: 10px auto;
   border: 1px solid #CCC;
@@ -65,7 +66,8 @@ input:focus, button:focus {
   font-family: 'Raleway', sans-serif;
 }
 .login-button {
-  width: 400px;
+  width: 30vw;
+  min-width: 300px;
   height: 40px;
   margin: 10px 0 20px 0;
   border: none;
