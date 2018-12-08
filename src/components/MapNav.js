@@ -8,7 +8,7 @@ class MapNav extends Component {
 
   render() {
     return (
-      <div className="map-nav-container" role="group" style={{ maxHeight: {this.props.mapNavHeight} }}>
+      <div className="map-nav-container" role="group" style={{ maxHeight: `${this.props.mapNavHeight}px` }}>
         <button onClick={this.props.removeFilters} className="map-nav-button" name="all">Show All</button>
         <button onClick={()=>this.props.applyFoodFilter(this.props.attractions)} className="map-nav-button" name="food">Food</button>
         <button onClick={()=>this.props.applyEventFilter(this.props.attractions)} className="map-nav-button" name="events">Events</button>
@@ -24,6 +24,7 @@ const mapStateToProps = (state) => {
     currentTrip: state.currentTrip,
     attractions: state.attractions,
     newMarker: state.newMarker,
+    mapNavHeight: state.mapNavHeight,
   }
 }
 

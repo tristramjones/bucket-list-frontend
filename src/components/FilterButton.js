@@ -6,14 +6,14 @@ import '../App.css';
 class FilterButton extends Component {
 
   handleFiltersToggle = (event) => {
-    this.props.toggleFilters(!this.props.areFiltersDisplayed)
+    parseInt(this.props.mapNavHeight) ? this.props.toggleFilters("0") : this.props.toggleFilters("40")
   }
 
   render() {
     return (
       <div className="filter-button-container">
         <button onClick={this.handleFiltersToggle}>
-          { this.props.areFiltersDisplayed ? 'Hide Filters' : 'Show Filters' }
+          { parseInt(this.props.mapNavHeight) ? 'Hide Filters' : 'Show Filters' }
         </button>
       </div>
     )
@@ -22,7 +22,7 @@ class FilterButton extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    areFiltersDisplayed: state.areFiltersDisplayed
+    mapNavHeight: state.mapNavHeight
   }
 }
 

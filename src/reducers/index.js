@@ -9,7 +9,7 @@ const defaultState = {
   currentAttraction: null,
   isNewPopupDisplayed: false,
   isBasicPopupDisplayed: false,
-  areFiltersDisplayed: false,
+  mapNavHeight: "0",
 }
 
 const reducer = (state=defaultState, action) => {
@@ -41,7 +41,7 @@ const reducer = (state=defaultState, action) => {
     case 'RESET_FILTER':
       return { ...state, filteredAttractions: [] }
     case 'TOGGLE_FILTERS':
-      return { ...state, areFiltersDisplayed: action.payload }
+      return { ...state, mapNavHeight: action.payload }
     case 'ADD_ATTRACTION':
       if(state.filteredAttractions.length > 0) {
         return { ...state, attractions: [...state.attractions, action.payload], filteredAttractions: [...state.filteredAttractions, action.payload] }
