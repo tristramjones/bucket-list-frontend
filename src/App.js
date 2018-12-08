@@ -25,7 +25,7 @@ class App extends Component {
           ?
           <div className="map-container">
             <FilterButton />
-            { this.props.areFiltersDisplayed ? <MapNav /> : null }
+            <MapNav />
             <GeoMap />
           </div>
           :
