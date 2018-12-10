@@ -47,8 +47,9 @@ class Login extends Component {
       this.setUser();
       this.props.setCurrentTrip(null);
     })
-    .catch(err=>this.setState({ errorMessage: '***'+err.json().message+'***' }));
-    // .catch(err=>err.json().then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' })));
+    // .catch(err=>this.setState({ errorMessage: '***'+err.json().message+'***' }));
+    .catch(err=>err.json())
+    .then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' }));
   }
 
   handleSignup = (event) => {
