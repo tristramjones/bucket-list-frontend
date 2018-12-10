@@ -47,8 +47,7 @@ class Login extends Component {
       this.setUser();
       this.props.setCurrentTrip(null);
     })
-    .catch(err=>err.json())
-    .then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' }))
+    .catch(err=>err.json().then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' })))
   }
 
   handleSignup = (event) => {
@@ -73,8 +72,7 @@ class Login extends Component {
       this.setUser();
       this.props.setCurrentTrip(null);
     })
-    .catch(err=>err.json())
-    .then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' }))
+    .catch(err=>err.json().then(obj=>this.setState({ errorMessage: '***'+obj.error+'***' })))
   }
 
   handleFormToggle = (event) => {
@@ -121,6 +119,7 @@ class Login extends Component {
           :
           <div className="signup-form-container">
             <h1 className="form-heading">Welcome to BucketList!</h1>
+            <h5 className="invalid">{ this.state.errorMessage }</h5>
             <form onSubmit={this.handleSignup}>
               <input
                 data-label="signupUsername"

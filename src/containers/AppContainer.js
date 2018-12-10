@@ -8,7 +8,11 @@ class AppContainer extends Component {
   render() {
     return (
       <Fragment>
-        { localStorage.currentUser ? <App /> : <Login /> }
+        { !localStorage.currentUser || !!JSON.parse(localStorage.currentUser).message ?
+          <Login />
+          :
+          <App />
+        }
       </Fragment>
     )
   }
