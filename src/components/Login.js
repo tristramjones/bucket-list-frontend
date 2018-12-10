@@ -47,9 +47,8 @@ class Login extends Component {
       this.setUser();
       this.props.setCurrentTrip(null);
     })
-    // .catch(err=>this.setState({ errorMessage: '***'+err.json().message+'***' }));
     .catch(err=>err.json())
-    .then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' }));
+    .then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' }))
   }
 
   handleSignup = (event) => {
@@ -74,8 +73,8 @@ class Login extends Component {
       this.setUser();
       this.props.setCurrentTrip(null);
     })
-    .catch(err=>console.log(err.json()));
-    // .catch(err=>err.json().then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' })));
+    .catch(err=>err.json())
+    .then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' }))
   }
 
   handleFormToggle = (event) => {
