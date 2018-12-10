@@ -47,7 +47,7 @@ class Login extends Component {
       this.setUser();
       this.props.setCurrentTrip(null);
     })
-    .catch(err=>console.log(err));
+    .catch(err=>console.log(err.json()));
     // .catch(err=>err.json().then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' })));
   }
 
@@ -73,7 +73,7 @@ class Login extends Component {
       this.setUser();
       this.props.setCurrentTrip(null);
     })
-    .catch(err=>console.log(err));
+    .catch(err=>console.log(err.json()));
     // .catch(err=>err.json().then(obj=>this.setState({ errorMessage: '***'+obj.message+'***' })));
   }
 
