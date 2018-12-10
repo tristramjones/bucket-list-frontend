@@ -59,7 +59,7 @@ class Login extends Component {
         'Accept': 'application/json'
       },
       body: JSON.stringify({
-        user: { username: this.state.loginUsername, password: this.state.loginPassword }
+        user: { username: this.state.signupUsername, password: this.state.signupPassword }
       })
     })
     .then(res=>{
